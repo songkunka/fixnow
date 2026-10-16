@@ -174,10 +174,15 @@ export default function Navbar({ onOpenBooking, onOpenPartner }: NavbarProps) {
         <div className="flex items-center gap-2.5">
           <a
             href={`tel:${BRAND_CONFIG.hotline.replace(/-/g, "")}`}
-            className="flex items-center gap-2 border-2 border-orange-500 text-orange-600 hover:bg-orange-500 hover:text-white font-bold text-sm px-4 py-2.5 rounded-full transition active:scale-95"
+            className="relative group flex items-center gap-2 border-2 border-orange-500 bg-orange-50/60 hover:bg-orange-500 text-orange-600 hover:text-white font-bold text-sm px-4 py-2 rounded-full transition-all duration-200 active:scale-95 shadow-sm hover:shadow-orange-500/20"
+            title={`โทรสายด่วนฉุกเฉิน ${BRAND_CONFIG.hotlineDisplay}`}
           >
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-orange-500 group-hover:bg-white"></span>
+            </span>
             <PhoneCall className="w-4 h-4" />
-            <span className="hidden sm:inline">{BRAND_CONFIG.hotlineDisplay}</span>
+            <span className="hidden sm:inline tracking-tight">{BRAND_CONFIG.hotlineDisplay}</span>
           </a>
 
           {/* Auth Button / User Avatar */}

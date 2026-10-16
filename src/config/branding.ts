@@ -41,9 +41,9 @@ export const BRAND_CONFIG = {
   subTagline: 'เชื่อมต่อคุณกับช่างซ่อมมืออาชีพและอู่ใกล้เคียง ถึงที่รวดเร็ว โปร่งใส ตรวจสอบได้',
   
   // ช่องทางติดต่อฉุกเฉิน
-  hotline: '061-415-2978',
-  hotlineDisplay: '061-415-2978',
-  secondaryPhone: '094-861-9595',
+  hotline: '000-000-0000',
+  hotlineDisplay: '000-000-0000',
+  secondaryPhone: '000-000-0000',
   supportEmail: 'support@fixnow.co.th',
   lineId: '@fixnow',
   lineUrl: 'https://line.me/R/ti/p/@fixnow',
