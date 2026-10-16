@@ -67,14 +67,14 @@ export default function ServiceCarousel({ onOpenBooking }: ServiceCarouselProps)
                   onClick={() => onOpenBooking(svc.id)}
                   className="snap-start shrink-0 w-[220px] sm:w-[260px] md:w-[280px] flex flex-col items-center cursor-pointer group"
                 >
-                  {/* 3D Image Card - matching 24carfix rounded card style */}
-                  <div className="relative w-full aspect-square bg-gradient-to-br from-slate-100 to-slate-200 rounded-3xl overflow-hidden flex items-center justify-center shadow-md group-hover:shadow-xl transition-all duration-300 mb-3 border border-slate-100">
+                  {/* 2D Minimal Icon Card - FixNow Brand CI */}
+                  <div className="relative w-full aspect-square bg-gradient-to-b from-white to-slate-50/90 rounded-3xl overflow-hidden flex items-center justify-center shadow-sm group-hover:shadow-xl group-hover:border-orange-500/40 group-hover:-translate-y-1 transition-all duration-300 mb-3 border border-slate-200/80">
                     <Image
                       src={imgSrc}
                       alt={svc.nameTh}
                       fill
                       sizes="(max-width: 768px) 220px, 280px"
-                      className="object-cover object-center group-hover:scale-105 transition-transform duration-500 p-2 sm:p-3 rounded-3xl"
+                      className="object-contain object-center group-hover:scale-105 transition-transform duration-300 p-4 sm:p-5"
                     />
                     {svc.badge && (
                       <span className="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-500 text-white shadow-sm">

@@ -8,7 +8,7 @@ export type AssetSourceMode = 'reference_24carfix' | 'fixnow_custom' | 'auto_det
 
 // ค่าเริ่มต้นใช้ 'reference_24carfix' เพื่อแสดงภาพ UI ต้นแบบ 34 รายการที่ดึงมา
 // เมื่อผู้ใช้พร้อมเปลี่ยนภาพ FixNow ให้เปลี่ยนเป็น 'fixnow_custom'
-export const ACTIVE_ASSET_MODE: AssetSourceMode = 'reference_24carfix';
+export const ACTIVE_ASSET_MODE: AssetSourceMode = 'fixnow_custom';
 
 export interface ServiceCardItem {
   id: string;
@@ -66,19 +66,19 @@ export const BRAND_CONFIG = {
     },
     appMockup: {
       ref: '/assets/24carfix/app_mockup.png',
-      brand: '/assets/brand/app-mockup.png',
+      brand: '/assets/24carfix/app_mockup.png',
     },
     appStore: {
       ref: '/assets/24carfix/app_store.png',
-      brand: '/assets/brand/app-store.png',
+      brand: '/assets/24carfix/app_store.png',
     },
     googlePlay: {
       ref: '/assets/24carfix/google_play.png',
-      brand: '/assets/brand/google-play.png',
+      brand: '/assets/24carfix/google_play.png',
     },
     qrcode: {
       ref: '/assets/24carfix/qrcode.png',
-      brand: '/assets/brand/qrcode.png',
+      brand: '/assets/24carfix/qrcode.png',
     },
     
     // ไอคอน Floating & Action
@@ -111,7 +111,7 @@ export const BRAND_CONFIG = {
         nameEn: 'Volunteer Car Repair',
         desc: 'รถจมน้ำ สตาร์ทไม่ติด ตรวจเช็กระบบไฟ ถ่ายน้ำมันเครื่อง ฟรีไม่มีค่าแรง',
         refImage: '/assets/24carfix/service_volunteer_car.jpg',
-        brandImage: '/assets/brand/services/service_volunteer_car.jpg',
+        brandImage: '/assets/brand/services/service_volunteer_car.png',
         badge: 'FREE',
         category: 'volunteer',
         priceEstimate: 'ฟรีค่าแรง (เฉพาะอะไหล่ตามจริง)',
@@ -122,7 +122,7 @@ export const BRAND_CONFIG = {
         nameEn: 'Volunteer Motorcycle Repair',
         desc: 'ซ่อมมอเตอร์ไซค์จมน้ำ ไล่น้ำมัน ล้างคาร์บูเรเตอร์/หัวฉีด ฟรีไม่มีค่าแรง',
         refImage: '/assets/24carfix/service_volunteer_motorcycle.jpg',
-        brandImage: '/assets/brand/services/service_volunteer_motorcycle.jpg',
+        brandImage: '/assets/brand/services/service_motorcycle_repair.png',
         badge: 'FREE',
         category: 'volunteer',
         priceEstimate: 'ฟรีค่าแรง',
@@ -144,7 +144,7 @@ export const BRAND_CONFIG = {
         nameEn: 'Emergency Car Repair',
         desc: 'ตรวจเช็กอาการหน้างาน เครื่องดับ สตาร์ทไม่ติด ความร้อนขึ้น ท่อยางแตก',
         refImage: '/assets/24carfix/service_repair.jpg',
-        brandImage: '/assets/brand/services/service_repair.jpg',
+        brandImage: '/assets/brand/services/service_repair.png',
         badge: 'HOT',
         category: 'repair',
         priceEstimate: 'ตรวจเช็กเริ่มต้น 500.-',
@@ -155,7 +155,7 @@ export const BRAND_CONFIG = {
         nameEn: 'Mobile Tire Repair',
         desc: 'ปะยางสตรีม ปะไหม เปลี่ยนยางอะไหล่ เติมลมไนโตรเจนฉุกเฉินถึงที่',
         refImage: '/assets/24carfix/service_tire.jpg',
-        brandImage: '/assets/brand/services/service_tire.jpg',
+        brandImage: '/assets/brand/services/service_tire.png',
         category: 'tire',
         priceEstimate: 'ปะไหมเริ่มต้น 350.-',
       },
@@ -165,7 +165,7 @@ export const BRAND_CONFIG = {
         nameEn: 'Slide Car & Towing Service',
         desc: 'เคลื่อนย้ายรถฉุกเฉิน รถโหลดเตี้ย รถอุบัติเหตุ เข้าอู่หรือศูนย์บริการทั่วไทย',
         refImage: '/assets/24carfix/service_slide_car.jpg',
-        brandImage: '/assets/brand/services/service_slide_car.jpg',
+        brandImage: '/assets/brand/services/service_slide_car.png',
         category: 'towing',
         priceEstimate: 'เริ่มต้น 1,500.- (ในเมือง)',
       },
@@ -175,7 +175,7 @@ export const BRAND_CONFIG = {
         nameEn: 'Car Locksmith Service',
         desc: 'เปิดประตูกระจกกรณีลืมกุญแจในรถ ทำกุญแจรีโมตสำรอง ชิป Immoblizer',
         refImage: '/assets/24carfix/service_key.jpg',
-        brandImage: '/assets/brand/services/service_key.jpg',
+        brandImage: '/assets/brand/services/service_key.png',
         category: 'other',
         priceEstimate: 'เปิดรถเริ่มต้น 800.-',
       },
@@ -185,7 +185,7 @@ export const BRAND_CONFIG = {
         nameEn: 'Mobile AC Cleaning',
         desc: 'ล้างแอร์แบบส่องกล้อง เติมน้ำยาแอร์ แอร์ไม่เย็น มีกลิ่นอับ บริการถึงบ้าน',
         refImage: '/assets/24carfix/service_ac.jpg',
-        brandImage: '/assets/brand/services/service_ac.jpg',
+        brandImage: '/assets/brand/services/service_ac.png',
         category: 'other',
         priceEstimate: 'เริ่มต้น 990.-',
       },
@@ -195,7 +195,7 @@ export const BRAND_CONFIG = {
         nameEn: 'Mobile Window Tinting',
         desc: 'ติดตั้งฟิล์มกรองแสงเซรามิก กันความร้อนสูง ช่างผู้ชำนาญการมาตรฐานศูนย์',
         refImage: '/assets/24carfix/service_film.jpg',
-        brandImage: '/assets/brand/services/service_film.jpg',
+        brandImage: '/assets/brand/services/service_film.png',
         category: 'other',
         priceEstimate: 'ประเมินราคาตามขนาดรถ',
       },
@@ -205,7 +205,7 @@ export const BRAND_CONFIG = {
         nameEn: 'Emergency Fuel Delivery',
         desc: 'น้ำมันหมดกลางทาง จัดส่งน้ำมันฉุกเฉิน 5-10 ลิตร ให้คุณเดินทางต่อได้ทันที',
         refImage: '/assets/24carfix/service_fuel.jpg',
-        brandImage: '/assets/brand/services/service_fuel.jpg',
+        brandImage: '/assets/brand/services/service_fuel.png',
         category: 'other',
         priceEstimate: 'ค่าบริการส่ง 300.- + ค่าน้ำมัน',
       },
@@ -215,7 +215,7 @@ export const BRAND_CONFIG = {
         nameEn: 'Motorcycle Mobile Repair',
         desc: 'ปะยาง เปลี่ยนสายพาน โซ่ สเตอ หัวเทียน มอเตอร์ไซค์ทั่วไปและ Bigbike',
         refImage: '/assets/24carfix/service_motorcycle_repair.jpg',
-        brandImage: '/assets/brand/services/service_motorcycle_repair.jpg',
+        brandImage: '/assets/brand/services/service_motorcycle_repair.png',
         category: 'repair',
         priceEstimate: 'เริ่มต้น 300.-',
       },
@@ -225,23 +225,35 @@ export const BRAND_CONFIG = {
         nameEn: 'Mobile Car Inspection',
         desc: 'ตรวจเช็กประเมินสภาพรถมือสอง วิเคราะห์ระบบไฟด้วยเครื่องอ่าน OBD2 มาตรฐาน',
         refImage: '/assets/24carfix/service_inspection.jpg',
-        brandImage: '/assets/brand/services/service_inspection.jpg',
+        brandImage: '/assets/brand/services/service_inspection.png',
         category: 'other',
         priceEstimate: 'เริ่มต้น 1,200.-',
       },
+      {
+        id: 'ev',
+        nameTh: 'ช่างรถยนต์ไฟฟ้า EV',
+        nameEn: 'Mobile EV & Hybrid Service',
+        desc: 'ตรวจเช็กระบบไฟ EV แบตเตอรี่ High Voltage ชาร์จฉุกเฉินนอกสถานที่',
+        refImage: '/assets/24carfix/service_inspection.jpg',
+        brandImage: '/assets/brand/services/service_ev.png',
+        badge: 'HOT',
+        category: 'other',
+        priceEstimate: 'เริ่มต้น 800.-',
+      },
+
     ] as ServiceCardItem[],
 
     // ไอคอนหมวดหมู่บริการสำหรับ Dropdown
     dropdownIcons: {
-      slide: '/assets/24carfix/icon_group_slide.png',
-      repair: '/assets/24carfix/icon_group_repair.png',
-      battery: '/assets/24carfix/icon_group_battery.png',
-      tire: '/assets/24carfix/icon_group_tire.png',
-      key: '/assets/24carfix/icon_group_key.png',
-      film: '/assets/24carfix/icon_group_film.png',
-      glass: '/assets/24carfix/icon_group_glass.png',
-      ac: '/assets/24carfix/icon_group_ac.png',
-      paint: '/assets/24carfix/icon_group_paint.png',
+      slide: '/assets/brand/services/service_slide_car.png',
+      repair: '/assets/brand/services/service_repair.png',
+      battery: '/assets/brand/services/service_battery.png',
+      tire: '/assets/brand/services/service_tire.png',
+      key: '/assets/brand/services/service_key.png',
+      film: '/assets/brand/services/service_film.png',
+      glass: '/assets/brand/services/service_film.png',
+      ac: '/assets/brand/services/service_ac.png',
+      paint: '/assets/brand/services/service_repair.png',
     },
   },
 };

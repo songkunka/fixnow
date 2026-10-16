@@ -107,8 +107,14 @@ export default function Navbar({ onOpenBooking, onOpenPartner }: NavbarProps) {
                     }}
                     className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-orange-50 transition text-left group"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center shrink-0 group-hover:bg-orange-600 transition">
-                      <Wrench className="w-5 h-5 text-orange-600 group-hover:text-white transition" />
+                    <div className="w-10 h-10 rounded-xl bg-orange-50/70 border border-orange-100 flex items-center justify-center shrink-0 group-hover:bg-orange-100/80 transition p-1.5">
+                      <Image
+                        src={getAssetUrl(svc.brandImage, svc.refImage)}
+                        alt={svc.nameTh}
+                        width={28}
+                        height={28}
+                        className="object-contain w-7 h-7 group-hover:scale-110 transition-transform"
+                      />
                     </div>
                     <div>
                       <div className="font-semibold text-slate-800 text-xs flex items-center gap-1.5">

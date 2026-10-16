@@ -205,12 +205,21 @@ export default function BookingWizardModal({
                         : "border-slate-200 hover:border-blue-400 hover:bg-slate-50"
                     }`}
                   >
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-bold text-slate-900 group-hover:text-blue-600 transition line-clamp-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-8 h-8 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center shrink-0 p-1">
+                        <Image
+                          src={getAssetUrl(svc.brandImage, svc.refImage)}
+                          alt={svc.nameTh}
+                          width={24}
+                          height={24}
+                          className="object-contain w-6 h-6"
+                        />
+                      </div>
+                      <span className="text-xs font-bold text-slate-900 group-hover:text-blue-600 transition line-clamp-1 flex-1">
                         {svc.nameTh}
                       </span>
                       {svc.badge && (
-                        <span className="text-[10px] font-extrabold px-1.5 py-0.5 rounded-md bg-amber-100 text-amber-800">
+                        <span className="text-[10px] font-extrabold px-1.5 py-0.5 rounded-md bg-amber-100 text-amber-800 shrink-0">
                           {svc.badge}
                         </span>
                       )}
