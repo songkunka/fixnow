@@ -88,48 +88,19 @@ export const BRAND_CONFIG = {
       wrench: '/assets/24carfix/icon_screwdriver.png',
     },
 
-    // แบนเนอร์หลัก Hero Swiper (4 สไลด์)
+    // แบนเนอร์หลัก Hero Banner (รองรับ 1 รูป หรือหลายสไลด์อัตโนมัติ)
     heroBanners: [
       {
-        id: 'volunteer_flood',
-        title: 'ช่างอาสาช่วยน้ำท่วม ฟรี!',
-        subtitle: 'FixNow รวมช่างอาสาและอู่ใกล้คุณ ซ่อมถึงที่ไม่มีค่าแรง เพื่อพี่น้องคนไทย',
-        ctaText: '🤝 เรียกช่างอาสา (ฟรี)',
-        ctaLink: '/booking?category=volunteer',
-        badge: 'โครงการเพื่อสังคม',
-        refImage: '/assets/24carfix/banner_volunteer.png',
-        brandImage: '/assets/brand/banners/banner_volunteer.png',
+        id: 'fixnow_hero_main',
+        title: 'FixNow แพลตฟอร์มช่วยเหลือฉุกเฉินและซ่อมรถนอกสถานที่ 24 ชั่วโมง',
+        subtitle: 'บริการช่วยเหลือฉุกเฉินและซ่อมรถยนต์นอกสถานที่ ตลอด 24 ชั่วโมง',
+        ctaText: 'เรียกช่างฉุกเฉิน!',
+        ctaLink: '/booking',
+        badge: 'บริการ 24 ชม.',
+        refImage: '/assets/brand/hero-banner-1.png',
+        brandImage: '/assets/brand/hero-banner-1.png',
       },
-      {
-        id: 'emergency_repair',
-        title: 'รถเสียฉุกเฉิน สตาร์ทไม่ติด?',
-        subtitle: 'ช่างมืออาชีพพร้อมเดินทางถึงจุดเกิดเหตุใน 30 นาที ตลอด 24 ชม. ทุกเส้นทาง',
-        ctaText: '🔧 เรียกช่างด่วน 24 ชม.',
-        ctaLink: '/booking?category=repair',
-        badge: 'บริการ 24 ชั่วโมง',
-        refImage: '/assets/24carfix/banner_app_1.jpg',
-        brandImage: '/assets/brand/banners/banner_app_1.jpg',
-      },
-      {
-        id: 'slide_car_network',
-        title: 'รถสไลด์ & รถยก ทั่วประเทศ',
-        subtitle: 'ยกรถมาตรฐานสูง ปลอดภัย ไม่ขูดขีด รองรับรถเก๋ง รถตู้ รถสปอร์ต และรถ EV',
-        ctaText: '🚛 เรียกรถสไลด์ทันที',
-        ctaLink: '/booking?category=towing',
-        badge: 'ราคาตามระยะทางจริง',
-        refImage: '/assets/24carfix/banner_app_2.jpg',
-        brandImage: '/assets/brand/banners/banner_app_2.jpg',
-      },
-      {
-        id: 'mobile_mechanic_hub',
-        title: 'สมัครร่วมเป็นเครือข่ายช่าง FixNow',
-        subtitle: 'เพิ่มรายได้ รับงานซ่อมและบริการฉุกเฉินในพื้นที่ของคุณ ยืนยันตัวตน KYC โปร่งใส',
-        ctaText: '📋 สมัครเป็นช่าง FixNow',
-        ctaLink: '/partner',
-        badge: 'สำหรับอู่และช่าง',
-        refImage: '/assets/24carfix/banner_app_3.jpg',
-        brandImage: '/assets/brand/banners/banner_app_3.jpg',
-      },
+      // หมายเหตุ: สามารถเพิ่มแบนเนอร์ถัดไปที่นี่ได้ตลอดเวลา ระบบจะเปิดโหมด Carousel อัตโนมัติเมื่อมีมากกว่า 1 รายการ
     ] as HeroBannerItem[],
 
     // การ์ดบริการ 12 หมวดหมู่หลัก (ภาพ 3D)
