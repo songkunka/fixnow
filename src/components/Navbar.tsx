@@ -16,9 +16,11 @@ import {
   LogOut,
   LayoutDashboard,
   ClipboardList,
+  MapPin,
 } from "lucide-react";
 import { BRAND_CONFIG, getAssetUrl } from "@/config/branding";
 import { useAuth } from "@/contexts/AuthContext";
+import { useUserLocation } from "@/contexts/LocationContext";
 
 interface NavbarProps {
   onOpenBooking: (category?: string) => void;
@@ -28,6 +30,7 @@ interface NavbarProps {
 export default function Navbar({ onOpenBooking, onOpenPartner }: NavbarProps) {
   const router = useRouter();
   const { user, profile, isLoading, signOut } = useAuth();
+  const { location } = useUserLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
@@ -62,19 +65,34 @@ export default function Navbar({ onOpenBooking, onOpenPartner }: NavbarProps) {
   return (
     <nav className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
-        {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-3 group shrink-0">
-          <div className="relative h-9 sm:h-10 w-36 sm:w-44 flex items-center">
-            <Image
-              src={logoSrc}
-              alt={BRAND_CONFIG.assets.logo.alt}
-              fill
-              sizes="(max-width: 768px) 144px, 176px"
-              className="object-contain object-left group-hover:scale-[1.02] transition"
-              priority
-            />
-          </div>
-        </Link>
+        {/* Brand Logo & Location Indicator */}
+        <div className="flex items-center gap-3 shrink-0">
+          <Link href="/" className="flex items-center gap-3 group shrink-0">
+            <div className="relative h-9 sm:h-10 w-36 sm:w-44 flex items-center">
+              <Image
+                src={logoSrc}
+                alt={BRAND_CONFIG.assets.logo.alt}
+                fill
+                sizes="(max-width: 768px) 144px, 176px"
+                className="object-contain object-left group-hover:scale-[1.02] transition"
+                priority
+              />
+            </div>
+          </Link>
+
+          {/* Location Badge (Top left interactive map link) */}
+          <Link
+            href="/location?returnUrl=/"
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-50 hover:bg-orange-50 border border-slate-200 hover:border-orange-200 text-slate-700 hover:text-orange-600 transition text-xs font-semibold max-w-[200px] shadow-2xs group"
+            title={location?.address || "ปักหมุดตำแหน่งของคุณ"}
+          >
+            <div className="w-5 h-5 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 shrink-0 group-hover:bg-orange-500 group-hover:text-white transition">
+              <MapPin className="w-3 h-3" />
+            </div>
+            <span className="truncate">{location?.shortAddress || location?.address || "ปักหมุดตำแหน่ง"}</span>
+            <ChevronDown className="w-3 h-3 text-slate-400 shrink-0" />
+          </Link>
+        </div>
 
         {/* Desktop Navigation Links */}
         <div className="hidden lg:flex items-center gap-1 text-sm font-medium text-slate-700">

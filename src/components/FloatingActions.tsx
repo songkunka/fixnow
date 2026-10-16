@@ -47,31 +47,14 @@ export default function FloatingActions({ onOpenBooking }: FloatingActionsProps)
         </a>
       </div>
 
-      {/* Mobile Sticky Bottom Action Bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 sm:hidden bg-white/95 backdrop-blur-md border-t border-slate-200 px-4 pt-2.5 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] flex items-center gap-2 shadow-2xl">
+      {/* Mobile Floating Action (Positioned safely above MobileBottomNav) */}
+      <div className="fixed bottom-20 right-4 z-40 sm:hidden flex flex-col items-end gap-2.5">
         <a
           href={`tel:${BRAND_CONFIG.hotline.replace(/-/g, "")}`}
-          className="flex-1 min-h-[48px] bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-3 py-3 rounded-xl flex items-center justify-center gap-1.5 active:scale-95 transition"
+          className="w-12 h-12 rounded-full bg-green-600 text-white flex items-center justify-center shadow-lg active:scale-95 transition"
+          aria-label="โทรฉุกเฉิน 24 ชม."
         >
-          <PhoneCall className="w-4 h-4 text-amber-400 shrink-0" />
-          <span>โทรด่วน 24 ชม.</span>
-        </a>
-
-        <button
-          onClick={onOpenBooking}
-          className="flex-[1.4] min-h-[48px] bg-gradient-to-r from-orange-500 to-orange-600 text-white text-xs font-extrabold px-3 py-3 rounded-xl flex items-center justify-center gap-1.5 shadow-lg shadow-orange-500/30 active:scale-95 transition"
-        >
-          <span>🔧 เรียกช่างทันที!</span>
-        </button>
-
-        <a
-          href={BRAND_CONFIG.lineUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="w-12 h-12 bg-[#06C755] hover:bg-[#05b34c] text-white rounded-xl flex items-center justify-center shrink-0 active:scale-95 transition shadow-sm"
-          aria-label="ติดต่อทาง LINE"
-        >
-          <MessageCircle className="w-5 h-5" />
+          <PhoneCall className="w-5 h-5 text-white" />
         </a>
       </div>
     </>

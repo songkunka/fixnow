@@ -12,6 +12,10 @@ import HowItWorksSection from "@/components/HowItWorksSection";
 import TrustedBrandsSection from "@/components/TrustedBrandsSection";
 import FloatingActions from "@/components/FloatingActions";
 import Footer from "@/components/Footer";
+import MobileLocationBar from "@/components/MobileLocationBar";
+import MobileFeaturedServices from "@/components/MobileFeaturedServices";
+import MobileCategoryGrid from "@/components/MobileCategoryGrid";
+import MobileBottomNav from "@/components/MobileBottomNav";
 
 export default function HomePage() {
   const router = useRouter();
@@ -31,45 +35,59 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-slate-900">
-      {/* Main Navbar (Logo + Services Dropdown + Nav Links + Phone CTA) */}
+    <div className="min-h-screen flex flex-col bg-slate-50 lg:bg-white text-slate-900 pb-16 lg:pb-0">
+      {/* 1. Mobile Top Location Bar (24carfix style top bar) */}
+      <MobileLocationBar />
+
+      {/* 2. Main Navbar (Logo + Location Badge + Services Dropdown + Nav Links + Phone CTA) */}
       <Navbar
         onOpenBooking={handleOpenBooking}
         onOpenPartner={handleOpenPartner}
       />
 
       <main className="flex-1">
-        {/* 3. Hero Banner Carousel + Emergency CTA Button */}
+        {/* 3. Hero Banner Carousel */}
         <HeroBanner onOpenBooking={handleOpenBooking} />
 
-        {/* 4. Services Section ("บริการของเรา ร้านซ่อมรถใกล้ฉัน") */}
-        <ServiceCarousel onOpenBooking={handleOpenBooking} />
+        {/* 4. Mobile Featured 5 Services (24carfix app layout - Mobile Only) */}
+        <MobileFeaturedServices onOpenBooking={handleOpenBooking} />
 
-        {/* 5. App Download Section (Orange gradient + Phone Mockup + QR) */}
+        {/* 5. Mobile Category Grid (4 cols - Mobile Only) */}
+        <MobileCategoryGrid onOpenBooking={handleOpenBooking} />
+
+        {/* 6. Desktop Services Section ("บริการของเรา ร้านซ่อมรถใกล้ฉัน" - Hidden on mobile) */}
+        <div className="hidden lg:block">
+          <ServiceCarousel onOpenBooking={handleOpenBooking} />
+        </div>
+
+        {/* 7. App Download Section (Orange gradient + Phone Mockup + QR) */}
         <AppDownloadSection />
 
-        {/* 6. Mechanic Portfolio Grid ("ผลงานช่าง ร้านซ่อมรถใกล้ฉัน") */}
+        {/* 8. Mechanic Portfolio Grid ("ผลงานช่าง ร้านซ่อมรถใกล้ฉัน") */}
         <MechanicPortfolioSection
           onOpenMechanicProfile={() => router.push("/mechanic/kong-01")}
         />
 
-        {/* 7. News Section ("ข่าวสารที่น่าสนใจ") - Empty placeholder */}
+        {/* 9. News Section ("ข่าวสารที่น่าสนใจ") */}
         <NewsSection />
 
-        {/* 8. How It Works (5-Step Flow + Phone Mockup) */}
+        {/* 10. How It Works (5-Step Flow + Phone Mockup) */}
         <HowItWorksSection onOpenBooking={() => handleOpenBooking()} />
 
-        {/* 9. Trusted Brands - Empty placeholder */}
+        {/* 11. Trusted Brands */}
         <TrustedBrandsSection />
       </main>
 
-      {/* 10. Footer */}
+      {/* 12. Footer (24carfix dark matte #1c1c1c style) */}
       <Footer
         onOpenBooking={handleOpenBooking}
         onOpenPartner={handleOpenPartner}
       />
 
-      {/* 11. Floating Quick Actions (Wrench → /booking, Phone, LINE) */}
+      {/* 13. Mobile Bottom Tab Bar (Home, Orders, Chat AI, Profile) */}
+      <MobileBottomNav />
+
+      {/* 14. Floating Quick Actions (Desktop stack & mobile quick call) */}
       <FloatingActions onOpenBooking={() => handleOpenBooking()} />
     </div>
   );

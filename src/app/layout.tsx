@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Anuphan, Manrope } from "next/font/google";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { LocationProvider } from "@/contexts/LocationContext";
 import "./globals.css";
 
 const anuphan = Anuphan({
@@ -60,7 +61,9 @@ export default function RootLayout({
     <html lang="th" className={`${anuphan.variable} ${manrope.variable} h-full`}>
       <body className="min-h-full flex flex-col font-sans antialiased bg-white text-[#17191C]">
         <AuthProvider>
-          {children}
+          <LocationProvider>
+            {children}
+          </LocationProvider>
         </AuthProvider>
       </body>
     </html>
