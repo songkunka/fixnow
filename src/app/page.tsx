@@ -2,7 +2,6 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import TopContactBar from "@/components/TopContactBar";
 import Navbar from "@/components/Navbar";
 import HeroBanner from "@/components/HeroBanner";
 import ServiceCarousel from "@/components/ServiceCarousel";
@@ -33,10 +32,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-slate-900">
-      {/* 1. Top Contact Bar (Social icons - Email, FB, LINE, TikTok) */}
-      <TopContactBar />
-
-      {/* 2. Main Navbar (Logo + Services Dropdown + Nav Links + Phone CTA) */}
+      {/* Main Navbar (Logo + Services Dropdown + Nav Links + Phone CTA) */}
       <Navbar
         onOpenBooking={handleOpenBooking}
         onOpenPartner={handleOpenPartner}
