@@ -54,9 +54,21 @@ export default function AppDownloadSection() {
 
         {/* Right Side - Download CTA */}
         <div className="flex-1 text-white text-center lg:text-left">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6">
-            เริ่มดาวน์โหลดได้แล้ววันนี้ !!
+          <div className="relative w-48 h-20 mb-3 mx-auto lg:mx-0">
+            <Image
+              src="/assets/brand/brand_tagline.png"
+              alt="FixNow Always With You"
+              fill
+              className="object-contain"
+            />
+          </div>
+
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4">
+            ดาวน์โหลดแอป FixNow ได้แล้ววันนี้!
           </h2>
+          <p className="text-white/90 text-sm md:text-base mb-6 max-w-lg">
+            เรียกช่างฉุกเฉินได้ทันที ติดตามสถานะเรียลไทม์ และชำระเงินปลอดภัยทุกการเดินทาง
+          </p>
 
           {/* App Store Badges */}
           <div className="flex items-center justify-center lg:justify-start gap-4 mb-8">

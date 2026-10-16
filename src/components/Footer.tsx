@@ -17,19 +17,19 @@ export default function Footer({ onOpenBooking, onOpenPartner }: FooterProps) {
   );
 
   return (
-    <footer id="contact" className="bg-[#1a1a2e] text-slate-300 pt-16 pb-24 sm:pb-12">
+    <footer id="contact" className="bg-[#17191C] text-slate-300 pt-16 pb-24 sm:pb-12 border-t border-[#2D3339]">
       <div className="max-w-7xl mx-auto px-4">
         {/* Top Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-12 border-b border-slate-700">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-12 border-b border-[#2D3339]">
           {/* Column 1: Brand Info */}
           <div className="space-y-4">
-            <div className="relative h-10 w-44">
+            <div className="relative h-11 w-44">
               <Image
                 src={logoFooterSrc}
                 alt={BRAND_CONFIG.assets.logoFooter.alt}
                 fill
                 sizes="176px"
-                className="object-contain object-left brightness-125"
+                className="object-contain object-left"
               />
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">

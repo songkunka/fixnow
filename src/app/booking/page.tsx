@@ -10,35 +10,42 @@ const SERVICE_CATEGORIES = [
   {
     id: "repair",
     name: "เรียกช่างฉุกเฉิน",
-    sub: "ซ่อมรถยนต์นอกสถานที่",
-    icon: "/assets/24carfix/service_repair.jpg",
-    badge: "แนะนำ",
+    sub: "ซ่อมเครื่องยนต์ / ระบบไฟ",
+    icon: "/assets/brand/icons/engine.svg",
+    badge: "HOT",
     featured: true,
   },
   {
+    id: "battery",
+    name: "ช่างแบตเตอรี่",
+    sub: "พ่วงแบต / เปลี่ยนแบตถึงที่",
+    icon: "/assets/brand/icons/battery.svg",
+    badge: "HOT",
+  },
+  {
+    id: "tire",
+    name: "ช่างปะยาง / เปลี่ยนยาง",
+    sub: "ปะไหม ปะสตรีม สลับยาง",
+    icon: "/assets/brand/icons/tire.svg",
+  },
+  {
     id: "towing",
-    name: "รถสไลด์/รถยก",
-    sub: "บริการเคลื่อนย้าย",
-    icon: "/assets/24carfix/service_slide_car.jpg",
+    name: "รถสไลด์ / รถยก 24 ชม.",
+    sub: "บริการเคลื่อนย้ายปลอดภัย",
+    icon: "/assets/brand/icons/tow-truck.svg",
   },
   {
-    id: "motorcycle",
-    name: "บริการมอเตอร์ไซค์",
-    sub: "ซ่อมมอเตอร์ไซค์",
-    icon: "/assets/24carfix/service_motorcycle_repair.jpg",
-  },
-  {
-    id: "parts",
-    name: "สั่งอะไหล่ใกล้ฉัน",
-    sub: "รถยนต์และมอเตอร์ไซค์",
-    icon: "/assets/24carfix/service_inspection.jpg",
+    id: "location",
+    name: "ค้นหาช่างใกล้ฉัน",
+    sub: "ระบุพิกัดช่างรอบตัวคุณ",
+    icon: "/assets/brand/icons/location.svg",
   },
   {
     id: "volunteer",
     name: "ช่างอาสาช่วยน้ำท่วม",
-    sub: "รถจมน้ำ สตาร์ทไม่ติด",
-    icon: "/assets/24carfix/service_volunteer_car.jpg",
-    badge: "ใหม่",
+    sub: "ซ่อมฟรี ไม่มีค่าแรง เพื่อสังคม",
+    icon: "/assets/brand/icons/safety.svg",
+    badge: "ฟรี",
     highlighted: true,
   },
 ];
@@ -46,13 +53,17 @@ const SERVICE_CATEGORIES = [
 export default function BookingPage() {
   return (
     <div className="p-6 md:p-10 pb-20 md:pb-10">
-      {/* Header text matching app.24carfix.com */}
+      {/* Header text with FixNow Brand CI */}
       <div className="text-center mb-10">
-        <p className="text-orange-600 font-semibold text-sm mb-1">หาช่าง</p>
-        <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900">
-          ช่างปะ
-          <span className="inline-block w-0.5 h-8 md:h-12 bg-orange-500 ml-1 animate-pulse" />
+        <div className="inline-block text-xs font-bold text-[#FF5A18] bg-orange-100 px-3 py-1 rounded-full mb-2">
+          EMERGENCY DISPATCH 24/7
+        </div>
+        <h1 className="text-3xl md:text-4xl font-extrabold text-[#17191C]">
+          เรียกช่างฉุกเฉิน <span className="text-[#FF5A18]">FixNow</span>
         </h1>
+        <p className="text-sm text-[#6E747B] mt-1">
+          เลือกหมวดหมู่บริการที่ต้องการ ช่างมืออาชีพพร้อมเดินทางถึงที่ภายใน 30 นาที
+        </p>
       </div>
 
       {/* Service Category Grid */}

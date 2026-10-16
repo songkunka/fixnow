@@ -8,7 +8,7 @@ export type AssetSourceMode = 'reference_24carfix' | 'fixnow_custom' | 'auto_det
 
 // ค่าเริ่มต้นใช้ 'reference_24carfix' เพื่อแสดงภาพ UI ต้นแบบ 34 รายการที่ดึงมา
 // เมื่อผู้ใช้พร้อมเปลี่ยนภาพ FixNow ให้เปลี่ยนเป็น 'fixnow_custom'
-export const ACTIVE_ASSET_MODE: AssetSourceMode = 'reference_24carfix';
+export const ACTIVE_ASSET_MODE: AssetSourceMode = 'fixnow_custom';
 
 export interface ServiceCardItem {
   id: string;
@@ -17,6 +17,7 @@ export interface ServiceCardItem {
   desc: string;
   refImage: string;
   brandImage?: string;
+  iconSvg?: string;
   badge?: 'HOT' | 'FREE' | 'RECOMMENDED';
   category: 'repair' | 'battery' | 'tire' | 'towing' | 'volunteer' | 'other';
   priceEstimate?: string;
@@ -37,8 +38,8 @@ export const BRAND_CONFIG = {
   name: 'FixNow',
   nameTh: 'ฟิกซ์นาว',
   legalName: 'บริษัท ฟิกซ์นาว แพลตฟอร์ม (ประเทศไทย) จำกัด',
-  tagline: 'บริการช่วยเหลือรถเสียฉุกเฉินและซ่อมรถนอกสถานที่ 24 ชั่วโมง ทั่วไทย',
-  subTagline: 'เชื่อมต่อคุณกับช่างซ่อมมืออาชีพและอู่ใกล้เคียง ถึงที่รวดเร็ว โปร่งใส ตรวจสอบได้',
+  tagline: 'YOUR CAR HELP, RIGHT NOW',
+  subTagline: 'บริการช่วยเหลือรถเสียฉุกเฉินและซ่อมรถนอกสถานที่ 24 ชั่วโมง ทั่วไทย ถึงที่รวดเร็ว โปร่งใส ตรวจสอบได้',
   
   // ช่องทางติดต่อฉุกเฉิน
   hotline: '061-415-2978',
@@ -52,7 +53,7 @@ export const BRAND_CONFIG = {
   youtubeUrl: 'https://youtube.com/@fixnowth',
   coverage: 'ครอบคลุม 77 จังหวัด ทั่วประเทศไทย 24 ชั่วโมง',
 
-  // รูปภาพและ Asset ต่างๆ
+  // รูปภาพและ Asset ต่างๆ ตามคู่มือ Brand CI
   assets: {
     logo: {
       ref: '/assets/24carfix/logo_main.png',
@@ -64,9 +65,28 @@ export const BRAND_CONFIG = {
       brand: '/assets/brand/logo-footer.svg',
       alt: 'FixNow Roadside Assistance Network',
     },
+    symbol: '/assets/brand/symbol.svg',
+    appIcon: '/assets/brand/app-icon.svg',
     appMockup: {
       ref: '/assets/24carfix/app_mockup.png',
       brand: '/assets/brand/app-mockup.png',
+    },
+    brandTagline: '/assets/brand/brand_tagline.png',
+    uniformPolo: '/assets/brand/uniform_polo.png',
+    uniformCap: '/assets/brand/uniform_cap.png',
+    mascots: {
+      ready: '/assets/brand/mascots/mascot_ready.png',
+      friendly: '/assets/brand/mascots/mascot_friendly.png',
+      pro: '/assets/brand/mascots/mascot_pro.png',
+    },
+    serviceIcons: {
+      battery: '/assets/brand/icons/battery.svg',
+      tire: '/assets/brand/icons/tire.svg',
+      towTruck: '/assets/brand/icons/tow-truck.svg',
+      engine: '/assets/brand/icons/engine.svg',
+      location: '/assets/brand/icons/location.svg',
+      booking: '/assets/brand/icons/booking.svg',
+      safety: '/assets/brand/icons/safety.svg',
     },
     appStore: {
       ref: '/assets/24carfix/app_store.png',
@@ -85,50 +105,40 @@ export const BRAND_CONFIG = {
     icons: {
       phone: '/assets/24carfix/icon_phone.svg',
       line: '/assets/24carfix/icon_line.svg',
-      wrench: '/assets/24carfix/icon_screwdriver.png',
+      wrench: '/assets/brand/icons/engine.svg',
     },
 
-    // แบนเนอร์หลัก Hero Swiper (4 สไลด์)
+    // แบนเนอร์หลัก Hero Swiper
     heroBanners: [
       {
-        id: 'volunteer_flood',
-        title: 'ช่างอาสาช่วยน้ำท่วม ฟรี!',
-        subtitle: 'FixNow รวมช่างอาสาและอู่ใกล้คุณ ซ่อมถึงที่ไม่มีค่าแรง เพื่อพี่น้องคนไทย',
-        ctaText: '🤝 เรียกช่างอาสา (ฟรี)',
-        ctaLink: '/booking?category=volunteer',
-        badge: 'โครงการเพื่อสังคม',
-        refImage: '/assets/24carfix/banner_volunteer.png',
-        brandImage: '/assets/brand/banners/banner_volunteer.png',
-      },
-      {
-        id: 'emergency_repair',
-        title: 'รถเสียฉุกเฉิน สตาร์ทไม่ติด?',
-        subtitle: 'ช่างมืออาชีพพร้อมเดินทางถึงจุดเกิดเหตุใน 30 นาที ตลอด 24 ชม. ทุกเส้นทาง',
+        id: 'promo_hero',
+        title: 'รถมีปัญหา? ช่างพร้อมไปหา',
+        subtitle: 'FixNow บริการช่วยเหลือฉุกเฉินและซ่อมรถ 24 ชั่วโมง ถึงไวใน 30 นาที ทุกเส้นทางทั่วไทย',
         ctaText: '🔧 เรียกช่างด่วน 24 ชม.',
         ctaLink: '/booking?category=repair',
-        badge: 'บริการ 24 ชั่วโมง',
+        badge: 'บริการฉุกเฉิน 24 ชั่วโมง',
         refImage: '/assets/24carfix/banner_app_1.jpg',
-        brandImage: '/assets/brand/banners/banner_app_1.jpg',
+        brandImage: '/assets/brand/banners/banner_promo.png',
       },
       {
-        id: 'slide_car_network',
-        title: 'รถสไลด์ & รถยก ทั่วประเทศ',
-        subtitle: 'ยกรถมาตรฐานสูง ปลอดภัย ไม่ขูดขีด รองรับรถเก๋ง รถตู้ รถสปอร์ต และรถ EV',
-        ctaText: '🚛 เรียกรถสไลด์ทันที',
+        id: 'van_network',
+        title: 'FixNow ให้ช่างไปหาคุณ',
+        subtitle: 'หน่วยบริการเคลื่อนที่ฉุกเฉินและเครือข่ายรถยก รถสไลด์ ครอบคลุม 77 จังหวัด ทั่วประเทศ',
+        ctaText: '🚛 เรียกรถสไลด์ / ค้นหาช่าง',
         ctaLink: '/booking?category=towing',
-        badge: 'ราคาตามระยะทางจริง',
+        badge: 'ครอบคลุม 77 จังหวัด',
         refImage: '/assets/24carfix/banner_app_2.jpg',
-        brandImage: '/assets/brand/banners/banner_app_2.jpg',
+        brandImage: '/assets/brand/banners/banner_van.png',
       },
       {
-        id: 'mobile_mechanic_hub',
-        title: 'สมัครร่วมเป็นเครือข่ายช่าง FixNow',
-        subtitle: 'เพิ่มรายได้ รับงานซ่อมและบริการฉุกเฉินในพื้นที่ของคุณ ยืนยันตัวตน KYC โปร่งใส',
-        ctaText: '📋 สมัครเป็นช่าง FixNow',
-        ctaLink: '/partner',
-        badge: 'สำหรับอู่และช่าง',
+        id: 'mobile_app_flow',
+        title: 'เรียกช่างง่าย ติดตามสถานะเรียลไทม์',
+        subtitle: 'ช่างมืออาชีพผ่านการยืนยันตัวตน KYC ตรวจสอบค่าบริการชัดเจนก่อนเริ่มงาน ปลอดภัย 100%',
+        ctaText: '📱 จองบริการออนไลน์',
+        ctaLink: '/booking',
+        badge: 'รับประกันงานซ่อม',
         refImage: '/assets/24carfix/banner_app_3.jpg',
-        brandImage: '/assets/brand/banners/banner_app_3.jpg',
+        brandImage: '/assets/brand/app-mockup.png',
       },
     ] as HeroBannerItem[],
 
@@ -141,6 +151,7 @@ export const BRAND_CONFIG = {
         desc: 'รถจมน้ำ สตาร์ทไม่ติด ตรวจเช็กระบบไฟ ถ่ายน้ำมันเครื่อง ฟรีไม่มีค่าแรง',
         refImage: '/assets/24carfix/service_volunteer_car.jpg',
         brandImage: '/assets/brand/services/service_volunteer_car.jpg',
+        iconSvg: '/assets/brand/icons/safety.svg',
         badge: 'FREE',
         category: 'volunteer',
         priceEstimate: 'ฟรีค่าแรง (เฉพาะอะไหล่ตามจริง)',
@@ -152,6 +163,7 @@ export const BRAND_CONFIG = {
         desc: 'ซ่อมมอเตอร์ไซค์จมน้ำ ไล่น้ำมัน ล้างคาร์บูเรเตอร์/หัวฉีด ฟรีไม่มีค่าแรง',
         refImage: '/assets/24carfix/service_volunteer_motorcycle.jpg',
         brandImage: '/assets/brand/services/service_volunteer_motorcycle.jpg',
+        iconSvg: '/assets/brand/icons/safety.svg',
         badge: 'FREE',
         category: 'volunteer',
         priceEstimate: 'ฟรีค่าแรง',
@@ -163,6 +175,7 @@ export const BRAND_CONFIG = {
         desc: 'พ่วงแบตเตอรี่ฉุกเฉิน หรือเปลี่ยนแบตใหม่ส่งตรงถึงที่ พร้อมรับประกันทุกลูก',
         refImage: '/assets/24carfix/service_battery.png',
         brandImage: '/assets/brand/services/service_battery.png',
+        iconSvg: '/assets/brand/icons/battery.svg',
         badge: 'HOT',
         category: 'battery',
         priceEstimate: 'เริ่มต้น 400.- (พ่วงแบต)',
@@ -174,6 +187,7 @@ export const BRAND_CONFIG = {
         desc: 'ตรวจเช็กอาการหน้างาน เครื่องดับ สตาร์ทไม่ติด ความร้อนขึ้น ท่อยางแตก',
         refImage: '/assets/24carfix/service_repair.jpg',
         brandImage: '/assets/brand/services/service_repair.jpg',
+        iconSvg: '/assets/brand/icons/engine.svg',
         badge: 'HOT',
         category: 'repair',
         priceEstimate: 'ตรวจเช็กเริ่มต้น 500.-',
@@ -185,6 +199,7 @@ export const BRAND_CONFIG = {
         desc: 'ปะยางสตรีม ปะไหม เปลี่ยนยางอะไหล่ เติมลมไนโตรเจนฉุกเฉินถึงที่',
         refImage: '/assets/24carfix/service_tire.jpg',
         brandImage: '/assets/brand/services/service_tire.jpg',
+        iconSvg: '/assets/brand/icons/tire.svg',
         category: 'tire',
         priceEstimate: 'ปะไหมเริ่มต้น 350.-',
       },
@@ -195,6 +210,7 @@ export const BRAND_CONFIG = {
         desc: 'เคลื่อนย้ายรถฉุกเฉิน รถโหลดเตี้ย รถอุบัติเหตุ เข้าอู่หรือศูนย์บริการทั่วไทย',
         refImage: '/assets/24carfix/service_slide_car.jpg',
         brandImage: '/assets/brand/services/service_slide_car.jpg',
+        iconSvg: '/assets/brand/icons/tow-truck.svg',
         category: 'towing',
         priceEstimate: 'เริ่มต้น 1,500.- (ในเมือง)',
       },

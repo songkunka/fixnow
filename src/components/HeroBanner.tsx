@@ -82,16 +82,21 @@ export default function HeroBanner({ onOpenBooking }: HeroBannerProps) {
         </div>
       </div>
 
-      {/* Emergency CTA Button (matching 24carfix orange CTA) */}
-      <div className="flex justify-center -mt-6 relative z-30 pb-8">
+      {/* Emergency CTA Button with FixNow Mascot */}
+      <div className="flex justify-center items-center gap-4 -mt-8 relative z-30 pb-6 px-4">
         <button
           onClick={() => onOpenBooking()}
-          className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-extrabold text-lg md:text-xl px-10 py-4 rounded-2xl shadow-2xl shadow-orange-500/40 active:scale-95 transition flex items-center gap-3"
+          className="bg-gradient-to-r from-[#FF5A18] to-[#C83D0A] hover:from-[#C83D0A] hover:to-[#FF5A18] text-white font-extrabold text-lg md:text-xl px-8 sm:px-12 py-4 rounded-2xl shadow-2xl shadow-orange-500/40 active:scale-95 transition flex items-center gap-3 border border-orange-400/30"
         >
-          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.049.58.025 1.193-.14 1.743" />
-          </svg>
-          <span>เรียกช่างฉุกเฉิน!</span>
+          <div className="relative w-8 h-8 shrink-0">
+            <Image
+              src="/assets/brand/mascots/mascot_ready.png"
+              alt="ช่าง FixNow พร้อมซ่อม"
+              fill
+              className="object-contain"
+            />
+          </div>
+          <span>เรียกช่างฉุกเฉิน 24 ชม.!</span>
         </button>
       </div>
     </section>

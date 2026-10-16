@@ -9,30 +9,30 @@ import { ChevronLeft } from "lucide-react";
 // Service sub-categories matching 24carfix booking flow
 const ALL_SERVICES: Record<string, { id: string; name: string; icon: string; badge?: string }[]> = {
   repair: [
-    { id: "car-repair", name: "ช่างซ่อมรถยนต์", icon: "/assets/24carfix/service_repair.jpg", badge: "ยอดนิยม" },
-    { id: "battery", name: "ช่างแบตเตอรี่ รถยนต์", icon: "/assets/24carfix/service_battery.png", badge: "ยอดนิยม" },
-    { id: "tire", name: "ช่างปะยาง รถยนต์", icon: "/assets/24carfix/service_tire.jpg" },
-    { id: "key", name: "ช่างกุญแจ รถยนต์", icon: "/assets/24carfix/service_key.jpg" },
-    { id: "fuel", name: "เติมน้ำมันฉุกเฉิน", icon: "/assets/24carfix/service_fuel.jpg" },
-    { id: "ev", name: "ช่างรถ EV", icon: "/assets/24carfix/service_inspection.jpg" },
-    { id: "alternator", name: "ไดนาโม ระบบไฟ", icon: "/assets/24carfix/service_repair.jpg" },
-    { id: "radiator", name: "หม้อน้ำ", icon: "/assets/24carfix/service_repair.jpg" },
+    { id: "car-repair", name: "ช่างซ่อมเครื่องยนต์", icon: "/assets/brand/icons/engine.svg", badge: "ยอดนิยม" },
+    { id: "battery", name: "ช่างแบตเตอรี่ รถยนต์", icon: "/assets/brand/icons/battery.svg", badge: "ยอดนิยม" },
+    { id: "tire", name: "ช่างปะยาง รถยนต์", icon: "/assets/brand/icons/tire.svg" },
+    { id: "key", name: "ช่างกุญแจ รถยนต์", icon: "/assets/brand/icons/engine.svg" },
+    { id: "fuel", name: "เติมน้ำมันฉุกเฉิน", icon: "/assets/brand/icons/location.svg" },
+    { id: "ev", name: "ช่างรถ EV / ไฟฟ้า", icon: "/assets/brand/icons/battery.svg" },
+    { id: "alternator", name: "ไดนาโม ระบบไฟ", icon: "/assets/brand/icons/engine.svg" },
+    { id: "radiator", name: "หม้อน้ำ ระบบหล่อเย็น", icon: "/assets/brand/icons/engine.svg" },
   ],
   towing: [
-    { id: "slide-car", name: "รถสไลด์", icon: "/assets/24carfix/service_slide_car.jpg" },
-    { id: "crane", name: "รถยก", icon: "/assets/24carfix/service_slide_car.jpg" },
+    { id: "slide-car", name: "รถสไลด์ฉุกเฉิน", icon: "/assets/brand/icons/tow-truck.svg", badge: "24 ชม." },
+    { id: "crane", name: "รถยกมาตรฐาน", icon: "/assets/brand/icons/tow-truck.svg" },
   ],
   motorcycle: [
-    { id: "mc-repair", name: "ซ่อมมอเตอร์ไซค์", icon: "/assets/24carfix/service_motorcycle_repair.jpg" },
-    { id: "mc-tire", name: "ปะยางมอเตอร์ไซค์", icon: "/assets/24carfix/service_tire.jpg" },
+    { id: "mc-repair", name: "ซ่อมมอเตอร์ไซค์", icon: "/assets/brand/icons/engine.svg" },
+    { id: "mc-tire", name: "ปะยางมอเตอร์ไซค์", icon: "/assets/brand/icons/tire.svg" },
   ],
   volunteer: [
-    { id: "vol-car", name: "ช่างอาสาซ่อมรถยนต์", icon: "/assets/24carfix/service_volunteer_car.jpg" },
-    { id: "vol-mc", name: "ช่างอาสาซ่อมมอเตอร์ไซค์", icon: "/assets/24carfix/service_volunteer_motorcycle.jpg" },
+    { id: "vol-car", name: "ช่างอาสาซ่อมรถยนต์", icon: "/assets/brand/icons/safety.svg", badge: "ฟรี" },
+    { id: "vol-mc", name: "ช่างอาสาซ่อมมอเตอร์ไซค์", icon: "/assets/brand/icons/safety.svg", badge: "ฟรี" },
   ],
   parts: [
-    { id: "parts-car", name: "อะไหล่รถยนต์", icon: "/assets/24carfix/service_inspection.jpg" },
-    { id: "parts-mc", name: "อะไหล่มอเตอร์ไซค์", icon: "/assets/24carfix/service_motorcycle_repair.jpg" },
+    { id: "parts-car", name: "สั่งอะไหล่รถยนต์", icon: "/assets/brand/icons/booking.svg" },
+    { id: "parts-mc", name: "สั่งอะไหล่มอเตอร์ไซค์", icon: "/assets/brand/icons/booking.svg" },
   ],
 };
 

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import TopContactBar from "@/components/TopContactBar";
 import Navbar from "@/components/Navbar";
 import HeroBanner from "@/components/HeroBanner";
+import QuickAccessGrid from "@/components/QuickAccessGrid";
 import ServiceCarousel from "@/components/ServiceCarousel";
 import AppDownloadSection from "@/components/AppDownloadSection";
 import MechanicPortfolioSection from "@/components/MechanicPortfolioSection";
@@ -45,6 +46,9 @@ export default function HomePage() {
       <main className="flex-1">
         {/* 3. Hero Banner Carousel + Emergency CTA Button */}
         <HeroBanner onOpenBooking={handleOpenBooking} />
+
+        {/* 3.5 Quick Access Services (Brand CI Slide 3 Squircle Vector Icons) */}
+        <QuickAccessGrid onOpenBooking={handleOpenBooking} />
 
         {/* 4. Services Section ("บริการของเรา ร้านซ่อมรถใกล้ฉัน") */}
         <ServiceCarousel onOpenBooking={handleOpenBooking} />

@@ -1,0 +1,14 @@
+FIXNOW COMPONENT INDEX
+
+Editable vector/text in PPTX and master SVG:
+- Header lockup and editable wordmark/taglines
+- Primary/reversed logo variants and isolated symbol constructions
+- Six editable palette swatches with labels and hex values
+- Typography samples
+- Seven service icon illustrations
+- Section dividers, labels, card backgrounds and borders
+
+Separate raster image objects/files:
+- mascot_ready.png, mascot_friendly.png, mascot_professional.png
+- brand_tagline.png
+- application_mobile.png, application_shirt.png, application_cap.png, application_van.png, application_promo.png
