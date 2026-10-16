@@ -27,8 +27,8 @@ export default function BookingLayout({
       {/* Top Header Bar */}
       <header className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
         <div className="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between">
-          <Link href="/" className="relative h-9 w-36">
-            <Image src={logoSrc} alt="FixNow" fill sizes="144px" className="object-contain object-left" />
+          <Link href="/" className="relative h-9 sm:h-10 w-36 sm:w-44">
+            <Image src={logoSrc} alt="FixNow" fill sizes="176px" className="object-contain object-left" priority />
           </Link>
 
           {/* User Avatar Placeholder */}
@@ -71,22 +71,22 @@ export default function BookingLayout({
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 min-w-0">
+        <main className="flex-1 min-w-0 pb-28 sm:pb-32 md:pb-8">
           {children}
         </main>
       </div>
 
       {/* Mobile Bottom Nav */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-200 shadow-2xl">
-        <div className="flex items-center justify-around py-2">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-2xl pb-[calc(0.5rem+env(safe-area-inset-bottom,0px))]">
+        <div className="flex items-center justify-around py-1.5">
           {SIDEBAR_LINKS.map((link) => {
-            const isActive = pathname === link.href || pathname.startsWith(link.href) && link.href !== "#";
+            const isActive = pathname === link.href || (pathname.startsWith(link.href) && link.href !== "#");
             return (
               <Link
                 key={link.label}
                 href={link.href}
-                className={`flex flex-col items-center gap-0.5 text-[10px] font-medium py-1 px-3 ${
-                  isActive ? "text-orange-600" : "text-slate-400"
+                className={`flex flex-col items-center justify-center min-h-[44px] min-w-[52px] gap-0.5 text-[10px] font-medium py-1 px-3 active:scale-95 transition ${
+                  isActive ? "text-orange-600 font-bold" : "text-slate-500 hover:text-slate-800"
                 }`}
               >
                 <link.icon className="w-5 h-5" />

@@ -45,3 +45,12 @@ next-env.d.ts
 backup_*
 *.bak
 *.tmp
+
+# AI agent harnesses & raw design packs
+.agent/
+.agents/
+.claude/
+.codex/
+.gemini/
+.impeccable/
+brandci/

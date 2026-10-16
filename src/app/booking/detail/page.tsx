@@ -55,7 +55,7 @@ function DetailContent() {
     <div className="p-6 md:p-10 pb-20 md:pb-10">
       {/* Back + Title */}
       <div className="flex items-center gap-3 mb-8">
-        <button onClick={() => router.back()} className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition">
+        <button onClick={() => router.back()} aria-label="ย้อนกลับ" className="w-11 h-11 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition active:scale-95 shrink-0">
           <ChevronLeft className="w-5 h-5 text-slate-600" />
         </button>
         <h1 className="text-xl md:text-2xl font-bold text-slate-900">กรอกรายละเอียด</h1>

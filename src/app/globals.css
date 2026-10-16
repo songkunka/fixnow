@@ -1,17 +1,36 @@
 @import "tailwindcss";
 
+@theme {
+  --color-orange-500: #FF5A18;
+  --color-orange-600: #C83D0A;
+  --color-orange-700: #9E2B00;
+  --color-brand-orange: #FF5A18;
+  --color-brand-burnt: #C83D0A;
+  --color-brand-black: #17191C;
+  --color-brand-steel: #6E747B;
+  --color-brand-silver: #DDE1E4;
+  --color-brand-workshop: #F4F2ED;
+  --font-sans: var(--font-anuphan), var(--font-manrope), system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-manrope), var(--font-anuphan), system-ui, sans-serif;
+}
+
 @layer base {
   :root {
-    --fn-navy-dark: #1a1a2e;
-    --fn-navy-surface: #16213e;
-    --fn-navy-light: #0f3460;
-    --fn-primary: #F97316;
-    --fn-primary-hover: #EA580C;
-    --fn-accent: #FF9F0A;
-    --fn-accent-hover: #E08900;
-    --fn-bg-light: #F8FAFC;
+    --fn-action-orange: #FF5A18;
+    --fn-burnt-orange: #C83D0A;
+    --fn-garage-black: #17191C;
+    --fn-steel-gray: #6E747B;
+    --fn-cool-silver: #DDE1E4;
+    --fn-workshop: #F4F2ED;
+    --fn-navy-dark: #17191C;
+    --fn-navy-surface: #1E232A;
+    --fn-primary: #FF5A18;
+    --fn-primary-hover: #C83D0A;
+    --fn-accent: #FF5A18;
+    --fn-accent-hover: #C83D0A;
+    --fn-bg-light: #FFFFFF;
     --fn-surface-light: #FFFFFF;
-    --fn-border-light: #E2E8F0;
+    --fn-border-light: #DDE1E4;
   }
 }
 
@@ -20,10 +39,15 @@ html {
 }
 
 body {
-  background-color: var(--fn-bg-light);
-  color: #0F172A;
-  font-family: var(--font-prompt), var(--font-inter), system-ui, -apple-system, sans-serif;
+  background-color: #FFFFFF;
+  color: #17191C;
+  font-family: var(--font-anuphan), var(--font-manrope), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-manrope), var(--font-anuphan), system-ui, sans-serif;
+  letter-spacing: -0.015em;
 }
 
 /* Glassmorphism Classes */

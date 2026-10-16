@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="90" viewBox="0 0 320 90">
+  <title>FixNow primary horizontal logo</title>
+  <g id="primary" transform="translate(4 4) scale(1)">
+    <g id="primary_symbol">
+      <rect id="primary_frame" x="0" y="0" width="68" height="68" rx="14" fill="#17191C"/>
+      <rect id="primary_counter" x="6" y="6" width="56" height="56" rx="9" fill="#FBFAF7"/>
+      <path id="primary_F" d="M19 16H50V24H27V29H42V37H27V50H19Z" fill="#17191C"/>
+      <path id="primary_action_slash" d="M31 26H51L44 34H24Z" fill="#FF5A18"/>
+      <circle id="primary_pin_dot" cx="51" cy="51" r="6.2" fill="#FF5A18"/>
+    </g>
+    <text id="primary_wordmark" x="82" y="50" font-family="Manrope, Inter, system-ui, sans-serif" font-size="56" font-weight="800" fill="#17191C">FixNow</text>
+    <text id="primary_tagline" x="84" y="68" font-family="Manrope, Inter, system-ui, sans-serif" font-size="10.5" font-weight="700" letter-spacing=".35" fill="#17191C">YOUR CAR HELP,</text>
+    <text id="primary_tagline2" x="180" y="68" font-family="Manrope, Inter, system-ui, sans-serif" font-size="10.5" font-weight="700" letter-spacing=".35" fill="#FF5A18">RIGHT NOW</text>
+  </g>
+</svg>

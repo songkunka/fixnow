@@ -55,12 +55,12 @@ export const BRAND_CONFIG = {
   // รูปภาพและ Asset ต่างๆ
   assets: {
     logo: {
-      ref: '/assets/24carfix/logo_main.png',
+      ref: '/assets/brand/logo.svg',
       brand: '/assets/brand/logo.svg',
       alt: 'FixNow แพลตฟอร์มช่วยเหลือรถเสียฉุกเฉิน 24 ชั่วโมง',
     },
     logoFooter: {
-      ref: '/assets/24carfix/logo_footer.png',
+      ref: '/assets/brand/logo-footer.svg',
       brand: '/assets/brand/logo-footer.svg',
       alt: 'FixNow Roadside Assistance Network',
     },

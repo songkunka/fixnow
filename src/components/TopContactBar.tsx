@@ -6,12 +6,12 @@ import { BRAND_CONFIG } from "@/config/branding";
 
 export default function TopContactBar() {
   return (
-    <div className="bg-white border-b border-slate-200 py-3 px-4">
+    <div className="hidden md:block bg-white border-b border-slate-200 py-3 px-4">
       <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
         {/* Logo Area (Left) */}
         <div className="flex items-center gap-2">
           <img
-            src="/assets/24carfix/logo_main.png"
+            src="/assets/brand/logo.svg"
             alt={BRAND_CONFIG.name}
             className="h-10 sm:h-12 object-contain"
           />

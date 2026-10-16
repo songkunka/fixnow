@@ -21,23 +21,48 @@ export default function NewsSection() {
           </h2>
         </div>
 
-        {/* Empty State - No articles yet */}
-        <div className="max-w-3xl mx-auto">
-          <div className="bg-white/15 backdrop-blur-sm rounded-3xl p-10 md:p-14 text-center border border-white/20">
-            <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-5">
-              <Newspaper className="w-8 h-8 text-white" />
+        {/* Emergency Tips Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {[
+            {
+              tag: "ความปลอดภัย",
+              title: "วิธีปฏิบัติตัวเมื่อรถเสียบนทางด่วน",
+              desc: "เปิดไฟฉุกเฉิน ชิดขอบทางด้านซ้าย อย่ารอในรถ และติดต่อแจ้งพิกัดขอความช่วยเหลือทันที",
+              date: "คำแนะนำฉุกเฉิน",
+            },
+            {
+              tag: "แบตเตอรี่",
+              title: "3 สัญญาณเตือนแบตเตอรี่ใกล้หมด",
+              desc: "สตาร์ทรถลากยาวผิดปกติ ไฟหน้ารถหรี่ลง หรือระบบไฟในห้องโดยสารเริ่มกระพริบ",
+              date: "เทคนิคดูแลรถ",
+            },
+            {
+              tag: "รถยก / รถสไลด์",
+              title: "เลือกรถยกหรือรถสไลด์ให้เหมาะกับรุ่นรถ",
+              desc: "รถเกียร์อัตโนมัติและรถขับเคลื่อน 4 ล้อ ควรใช้รถสไลด์แบบยกขึ้นแท่นเพื่อถนอมระบบเกียร์",
+              date: "คู่มือผู้ใช้รถ",
+            },
+          ].map((item, idx) => (
+            <div
+              key={idx}
+              className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/30 flex flex-col justify-between text-left hover:bg-white transition"
+            >
+              <div>
+                <span className="inline-block text-[11px] font-bold uppercase tracking-wider text-orange-600 bg-orange-100 px-2.5 py-1 rounded-full mb-3">
+                  {item.tag}
+                </span>
+                <h3 className="text-base font-bold text-slate-900 mb-2 leading-snug">
+                  {item.title}
+                </h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-slate-100 text-[11px] font-medium text-slate-500">
+                {item.date}
+              </div>
             </div>
-            <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
-              เร็วๆ นี้! บทความและข่าวสารจาก FixNow
-            </h3>
-            <p className="text-sm md:text-base text-white/80 max-w-lg mx-auto leading-relaxed">
-              FixNow กำลังเตรียมเนื้อหาสาระดีๆ เกี่ยวกับการดูแลรักษารถยนต์ เทคนิคซ่อมเบื้องต้น โปรโมชั่นพิเศษ และข่าวอัปเดตบริการใหม่ๆ ของเราให้คุณ
-            </p>
-            <div className="mt-6 flex items-center justify-center gap-3 text-xs text-white/60">
-              <span className="w-2 h-2 rounded-full bg-white/40 animate-pulse" />
-              <span>กำลังจัดเตรียมเนื้อหา...</span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
