@@ -2,23 +2,16 @@
 
 @layer base {
   :root {
-    --fn-orange-action: #FF5A18;
-    --fn-orange-burnt: #C83D0A;
-    --fn-black-garage: #17191C;
-    --fn-gray-steel: #6E747B;
-    --fn-silver-cool: #DDE1E4;
-    --fn-bg-workshop: #F4F2ED;
-
-    /* Legacy mapping aliases */
-    --fn-primary: #FF5A18;
-    --fn-primary-hover: #C83D0A;
-    --fn-accent: #FF5A18;
-    --fn-navy-dark: #17191C;
-    --fn-navy-surface: #22262B;
-    --fn-navy-light: #2D3339;
-    --fn-bg-light: #F4F2ED;
+    --fn-navy-dark: #1a1a2e;
+    --fn-navy-surface: #16213e;
+    --fn-navy-light: #0f3460;
+    --fn-primary: #F97316;
+    --fn-primary-hover: #EA580C;
+    --fn-accent: #FF9F0A;
+    --fn-accent-hover: #E08900;
+    --fn-bg-light: #F8FAFC;
     --fn-surface-light: #FFFFFF;
-    --fn-border-light: #DDE1E4;
+    --fn-border-light: #E2E8F0;
   }
 }
 
@@ -27,9 +20,9 @@ html {
 }
 
 body {
-  background-color: var(--fn-bg-workshop);
-  color: #17191C;
-  font-family: var(--font-anuphan), var(--font-manrope), system-ui, -apple-system, sans-serif;
+  background-color: var(--fn-bg-light);
+  color: #0F172A;
+  font-family: var(--font-prompt), var(--font-inter), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
 }
 

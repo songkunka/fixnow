@@ -95,44 +95,20 @@ export default function PartnerRegisterPage() {
       </nav>
 
       <main className="max-w-3xl mx-auto px-4 py-8">
-        {/* Header with FixNow Uniform Showcase */}
-        <div className="bg-[#17191C] text-white rounded-3xl p-6 sm:p-8 mb-8 border border-white/10 shadow-xl overflow-hidden relative">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
-            <div className="flex-1">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-xs bg-[#FF5A18] text-white font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
-                  Partner Network
-                </span>
-                <span className="text-xs text-slate-400">KYC Verified</span>
-              </div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold mb-2">
-                สมัครเป็นช่าง <span className="text-[#FF5A18]">FixNow</span>
-              </h1>
-              <p className="text-sm text-slate-300 leading-relaxed mb-4 max-w-lg">
-                เข้าร่วมเครือข่ายช่างผู้เชี่ยวชาญ FixNow รับงานซ่อมฉุกเฉินในพื้นที่ของคุณ พร้อมรับชุดยูนิฟอร์มและอุปกรณ์มาตรฐานแบรนด์ FixNow!
-              </p>
-              <div className="flex items-center gap-4 text-xs text-orange-200">
-                <span>✓ รายได้มั่นคงตามงานจริง</span>
-                <span>✓ ประกันคุ้มครองงานซ่อม</span>
-              </div>
+        {/* Header */}
+        <div className="bg-slate-900 text-white rounded-2xl p-6 mb-8">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center">
+              <ShieldCheck className="w-6 h-6" />
             </div>
-
-            {/* Uniform Showcase Badges */}
-            <div className="flex items-center gap-3 shrink-0">
-              <div className="w-24 h-28 sm:w-28 sm:h-32 rounded-2xl bg-white/10 p-2 flex flex-col items-center justify-center border border-white/20">
-                <div className="relative w-full h-20">
-                  <Image src="/assets/brand/uniform_polo.png" alt="เสื้อโปโลช่าง FixNow" fill className="object-contain" />
-                </div>
-                <span className="text-[10px] text-slate-300 font-bold mt-1">เสื้อฟอร์มช่าง</span>
-              </div>
-              <div className="w-24 h-28 sm:w-28 sm:h-32 rounded-2xl bg-white/10 p-2 flex flex-col items-center justify-center border border-white/20">
-                <div className="relative w-full h-20">
-                  <Image src="/assets/brand/uniform_cap.png" alt="หมวกช่าง FixNow" fill className="object-contain" />
-                </div>
-                <span className="text-[10px] text-slate-300 font-bold mt-1">หมวกประจำการ</span>
-              </div>
+            <div>
+              <h1 className="text-xl font-bold">สมัครเป็นช่าง FixNow</h1>
+              <p className="text-xs text-slate-400">Partner Registration (KYC Verification)</p>
             </div>
           </div>
+          <p className="text-sm text-slate-300 leading-relaxed">
+            เข้าร่วมเครือข่ายช่างผู้เชี่ยวชาญ FixNow รับงานซ่อมและบริการฉุกเฉินในพื้นที่ของคุณ เพิ่มรายได้ สร้างผลงานและรีวิวในระบบ
+          </p>
         </div>
 
         {/* Form */}

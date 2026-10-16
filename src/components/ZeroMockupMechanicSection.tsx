@@ -101,68 +101,68 @@ export default function ZeroMockupMechanicSection({
               FixNow เชื่อมโยงระบบกับช่างที่เปิดสวิตช์พร้อมวิ่งงานจริงผ่าน GPS เมื่อคุณกดเรียกช่าง ระบบจะกระจายคำขอไปยังช่างและอู่ที่ใกล้ที่สุดทันที
             </p>
 
-            {/* Verified Mechanic Showcase Card (FixNow Certified Mechanic) */}
-            <div className="w-full max-w-xl bg-gradient-to-r from-orange-50/50 via-white to-orange-50/30 border border-[#FF5A18]/30 rounded-2xl p-4 sm:p-5 text-left mb-6 shadow-sm hover:shadow-md transition">
+            {/* Verified Mechanic Showcase Card (ช่างก้อง ตัวอย่างโปรไฟล์จริงจาก 24carfix) */}
+            <div className="w-full max-w-xl bg-gradient-to-r from-blue-50 via-indigo-50 to-slate-50 border border-blue-200 rounded-2xl p-4 sm:p-5 text-left mb-6 shadow-sm hover:shadow-md transition">
               <div className="flex items-center justify-between gap-2 mb-3">
-                <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#17191C] uppercase tracking-wide">
-                  <Sparkles className="w-3.5 h-3.5 text-[#FF5A18]" />
-                  <span>ตัวอย่างโปรไฟล์ช่างที่ผ่านการยืนยันตัวตน (FixNow Certified Showcase)</span>
+                <div className="flex items-center gap-1.5 text-[11px] font-bold text-blue-800 uppercase tracking-wide">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                  <span>ตัวอย่างโปรไฟล์ช่างที่ผ่านการยืนยันตัวตน (Verified Partner Showcase)</span>
                 </div>
-                <span className="text-[10px] bg-emerald-100 text-emerald-800 font-extrabold px-2.5 py-0.5 rounded-full">
-                  ● สแตนด์บาย 24 ชม.
+                <span className="text-[10px] bg-emerald-100 text-emerald-800 font-extrabold px-2 py-0.5 rounded-full">
+                  Online สแตนด์บาย
                 </span>
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden bg-[#F4F2ED] border-2 border-[#FF5A18] shrink-0 shadow-md">
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border-2 border-blue-500 shrink-0 shadow">
                   <Image
-                    src="/assets/brand/mascots/mascot_pro.png"
-                    alt="ช่าง FixNow มืออาชีพ"
+                    src="/assets/24carfix/mechanic_kong_avatar.jpg"
+                    alt="ช่างก้อง รัชดา"
                     fill
                     sizes="80px"
-                    className="object-contain p-1"
+                    className="object-cover object-top"
                   />
                 </div>
 
                 <div className="flex-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <h4 className="font-bold text-[#17191C] text-sm sm:text-base">
-                      ช่างต้น (FixNow Mobile Team)
+                    <h4 className="font-bold text-slate-900 text-sm sm:text-base">
+                      ช่างก้อง (ก้องเกียรติ การช่าง)
                     </h4>
-                    <span className="inline-flex items-center gap-1 text-[10px] bg-orange-100 text-[#FF5A18] font-bold px-2 py-0.5 rounded-md">
-                      <CheckCircle2 className="w-3 h-3 text-[#FF5A18]" />
-                      <span>KYC ผ่านแล้ว 100%</span>
+                    <span className="inline-flex items-center gap-1 text-[10px] bg-blue-100 text-blue-800 font-semibold px-2 py-0.5 rounded-md">
+                      <CheckCircle2 className="w-3 h-3 text-blue-600" />
+                      <span>KYC ผ่านแล้ว</span>
                     </span>
                   </div>
 
-                  <div className="text-xs text-[#6E747B] mt-0.5 flex items-center gap-1">
-                    <MapPin className="w-3 h-3 text-[#FF5A18] shrink-0" />
+                  <div className="text-xs text-slate-600 mt-0.5 flex items-center gap-1">
+                    <MapPin className="w-3 h-3 text-blue-600 shrink-0" />
                     <span>โซนรัชดา - ลาดพร้าว - พระราม 9, กรุงเทพฯ</span>
                   </div>
 
-                  <div className="flex items-center gap-3 mt-2 text-[11px] text-[#6E747B]">
+                  <div className="flex items-center gap-3 mt-2 text-[11px] text-slate-500">
                     <span className="font-bold text-amber-600 flex items-center gap-0.5">
                       <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                      <span>4.98 (210 รีวิว)</span>
+                      <span>4.95 (142 รีวิว)</span>
                     </span>
                     <span>•</span>
-                    <span className="font-medium text-[#17191C]">สำเร็จ 450+ เคส</span>
+                    <span className="font-medium text-slate-700">สำเร็จ 348 เคส</span>
                     <span>•</span>
-                    <span className="text-emerald-700 font-bold">ถึงไวใน 20 นาที</span>
+                    <span className="text-emerald-700 font-medium">ถึงไวใน 25 นาที</span>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-[#DDE1E4] flex items-center justify-between">
-                <span className="text-[11px] text-[#6E747B]">
-                  เชี่ยวชาญ: ซ่อมเครื่องยนต์, รถสตาร์ทไม่ติด, ระบบไฟ, พ่วง/เปลี่ยนแบตเตอรี่
+              <div className="mt-4 pt-3 border-t border-blue-200/60 flex items-center justify-between">
+                <span className="text-[11px] text-slate-500">
+                  เชี่ยวชาญ: ซ่อมเครื่องยนต์, รถสตาร์ทไม่ติด, ระบบไฟ, แบตเตอรี่
                 </span>
                 <button
                   type="button"
                   onClick={onOpenMechanicProfile}
-                  className="bg-[#FF5A18] hover:bg-[#C83D0A] text-white font-bold text-xs px-3.5 py-1.5 rounded-lg transition active:scale-95 flex items-center gap-1 shadow-sm shrink-0"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-lg transition active:scale-95 flex items-center gap-1 shadow-sm shrink-0"
                 >
-                  <span>ดูผลงานจริง</span>
+                  <span>ดูโปรไฟล์และผลงานจริง</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>

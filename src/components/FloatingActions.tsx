@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import { PhoneCall, MessageCircle } from "lucide-react";
 import { BRAND_CONFIG } from "@/config/branding";
 
@@ -14,23 +13,15 @@ export default function FloatingActions({ onOpenBooking }: FloatingActionsProps)
     <>
       {/* Desktop Floating Action Stack (Bottom Right) - matching 24carfix style */}
       <div className="fixed bottom-6 right-6 z-40 hidden sm:flex flex-col items-end gap-3">
-        {/* FixNow Mascot / Emergency Booking */}
+        {/* Wrench / Emergency Booking */}
         <button
           onClick={onOpenBooking}
-          className="group relative w-16 h-16 rounded-full bg-gradient-to-tr from-[#FF5A18] to-[#C83D0A] hover:scale-105 text-white flex items-center justify-center shadow-2xl hover:shadow-orange-500/50 transition-all duration-300 active:scale-95 border-2 border-white"
-          aria-label="เรียกช่างฉุกเฉิน 24 ชม."
+          className="w-14 h-14 rounded-full bg-orange-500 hover:bg-orange-600 text-white flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-200 active:scale-95"
+          aria-label="เรียกช่างฉุกเฉิน"
         >
-          <div className="relative w-12 h-12">
-            <Image
-              src="/assets/brand/mascots/mascot_friendly.png"
-              alt="FixNow Mascot"
-              fill
-              className="object-contain"
-            />
-          </div>
-          <span className="absolute -top-1 -left-2 bg-[#17191C] text-white text-[9px] font-bold px-2 py-0.5 rounded-full border border-white/20 shadow">
-            24 ชม.
-          </span>
+          <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.049.58.025 1.193-.14 1.743" />
+          </svg>
         </button>
 
         {/* Emergency Call Button */}

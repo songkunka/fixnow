@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import { Wrench, Truck, Bike, BatteryCharging, Disc, HeartHandshake } from "lucide-react";
 
 interface QuickAccessGridProps {
   onOpenBooking: (category?: string) => void;
@@ -11,111 +11,110 @@ export default function QuickAccessGrid({ onOpenBooking }: QuickAccessGridProps)
   const cards = [
     {
       id: "repair",
-      title: "ช่างซ่อมเครื่องยนต์",
-      subtitle: "สตาร์ทไม่ติด เครื่องดับ ระบบไฟ",
-      badge: "HOT",
-      badgeColor: "bg-[#FF5A18] text-white",
-      iconSvg: "/assets/brand/icons/engine.svg",
+      title: "เรียกช่างฉุกเฉิน",
+      subtitle: "ซ่อมรถยนต์นอกสถานที่ 24 ชม.",
+      badge: "แนะนำ",
+      badgeColor: "bg-amber-500 text-white",
+      icon: Wrench,
+      iconBg: "bg-amber-50 text-amber-600 border-amber-200",
       categoryId: "repair",
+    },
+    {
+      id: "towing",
+      title: "รถสไลด์ / รถยก",
+      subtitle: "บริการเคลื่อนย้ายปลอดภัยทั่วไทย",
+      badge: "24 ชม.",
+      badgeColor: "bg-blue-600 text-white",
+      icon: Truck,
+      iconBg: "bg-blue-50 text-blue-600 border-blue-200",
+      categoryId: "slide_car",
     },
     {
       id: "battery",
       title: "ช่างแบตเตอรี่",
-      subtitle: "พ่วงแบตเตอรี่ เปลี่ยนแบตถึงที่",
-      badge: "HOT",
-      badgeColor: "bg-[#FF5A18] text-white",
-      iconSvg: "/assets/brand/icons/battery.svg",
+      subtitle: "พ่วงแบต / เปลี่ยนแบตเตอรี่ถึงที่",
+      badge: "ยอดนิยม",
+      badgeColor: "bg-emerald-600 text-white",
+      icon: BatteryCharging,
+      iconBg: "bg-emerald-50 text-emerald-600 border-emerald-200",
       categoryId: "battery",
     },
     {
       id: "tire",
       title: "ช่างปะยาง / เปลี่ยนยาง",
-      subtitle: "ปะไหม สตรีม สลับยางอะไหล่",
-      iconSvg: "/assets/brand/icons/tire.svg",
+      subtitle: "ปะไหม ปะสตรีม สลับยางอะไหล่",
+      icon: Disc,
+      iconBg: "bg-slate-100 text-slate-700 border-slate-200",
       categoryId: "tire",
     },
     {
-      id: "towing",
-      title: "รถสไลด์ / รถยก 24 ชม.",
-      subtitle: "เคลื่อนย้ายรถฉุกเฉิน ทั่วไทย",
-      badge: "24 ชม.",
-      badgeColor: "bg-[#17191C] text-white",
-      iconSvg: "/assets/brand/icons/tow-truck.svg",
-      categoryId: "slide_car",
-    },
-    {
-      id: "location",
-      title: "ค้นหาช่างใกล้ฉัน",
-      subtitle: "จับคู่ช่างที่ใกล้ที่สุดผ่าน GPS",
-      badge: "GPS",
-      badgeColor: "bg-emerald-600 text-white",
-      iconSvg: "/assets/brand/icons/location.svg",
-      categoryId: "repair",
+      id: "motorcycle",
+      title: "บริการมอเตอร์ไซค์",
+      subtitle: "ซ่อมมอเตอร์ไซค์และ Bigbike นอกสถานที่",
+      icon: Bike,
+      iconBg: "bg-purple-50 text-purple-600 border-purple-200",
+      categoryId: "motorcycle_repair",
     },
     {
       id: "volunteer",
       title: "ช่างอาสาช่วยน้ำท่วม",
-      subtitle: "ซ่อมฟรี ไม่มีค่าแรง เพื่อพี่น้องคนไทย",
-      badge: "ฟรี",
+      subtitle: "ซ่อมฟรี ไม่มีค่าแรง เพื่อสังคม",
+      badge: "ฟรี 100%",
       badgeColor: "bg-red-500 text-white",
-      iconSvg: "/assets/brand/icons/safety.svg",
+      icon: HeartHandshake,
+      iconBg: "bg-red-50 text-red-600 border-red-200",
       categoryId: "volunteer_car",
     },
   ];
 
   return (
     <section className="py-8 px-4 max-w-7xl mx-auto w-full">
-      <div className="flex items-center justify-between mb-5">
+      <div className="flex items-center justify-between mb-4">
         <div>
-          <h2 className="text-xl md:text-2xl font-bold text-[#17191C] flex items-center gap-2">
+          <h2 className="text-xl md:text-2xl font-bold text-slate-900 flex items-center gap-2">
             <span>บริการด่วนฉุกเฉิน</span>
-            <span className="text-xs bg-orange-100 text-[#FF5A18] font-bold px-2.5 py-0.5 rounded-full">
-              Quick Services
+            <span className="text-xs bg-amber-100 text-amber-800 font-semibold px-2 py-0.5 rounded-full">
+              Quick Booking
             </span>
           </h2>
-          <p className="text-xs md:text-sm text-[#6E747B] mt-0.5">
-            เลือกบริการที่ต้องการ ช่าง FixNow พร้อมเดินทางถึงจุดเกิดเหตุภายใน 30 นาที
+          <p className="text-xs md:text-sm text-slate-500">
+            เลือกบริการที่ต้องการ ช่างมืออาชีพพร้อมเดินทางถึงจุดเกิดเหตุทันที
           </p>
         </div>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
         {cards.map((card) => {
+          const Icon = card.icon;
           return (
             <button
               key={card.id}
               onClick={() => onOpenBooking(card.categoryId)}
-              className="group relative flex flex-col items-center text-center p-4 rounded-2xl bg-white border border-[#DDE1E4] hover:border-[#FF5A18] shadow-sm hover:shadow-xl hover:shadow-orange-500/10 transition-all duration-300 active:scale-[0.98]"
+              className="group relative flex flex-col items-start p-4 rounded-2xl bg-white border border-slate-200/80 hover:border-blue-400 shadow-sm hover:shadow-xl transition-all duration-200 text-left active:scale-[0.98]"
             >
               {card.badge && (
                 <span
-                  className={`absolute top-2.5 right-2.5 text-[10px] font-bold px-2 py-0.5 rounded-full ${card.badgeColor}`}
+                  className={`absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded-full ${card.badgeColor}`}
                 >
                   {card.badge}
                 </span>
               )}
 
-              {/* Brand CI Squircle with Orange Outline Ring */}
-              <div className="relative w-16 h-16 rounded-2xl bg-[#F4F2ED] border-2 border-[#FF5A18]/20 group-hover:border-[#FF5A18] p-3 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300 shadow-inner">
-                <div className="relative w-10 h-10">
-                  <Image
-                    src={card.iconSvg}
-                    alt={card.title}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
+              <div
+                className={`w-12 h-12 rounded-xl border flex items-center justify-center mb-3 group-hover:scale-110 transition duration-200 ${card.iconBg}`}
+              >
+                <Icon className="w-6 h-6" />
               </div>
 
-              <div className="font-bold text-[#17191C] text-sm group-hover:text-[#FF5A18] transition line-clamp-1">
+              <div className="font-bold text-slate-800 text-sm md:text-base group-hover:text-blue-600 transition">
                 {card.title}
               </div>
-              <div className="text-[11px] text-[#6E747B] line-clamp-1 mt-0.5">
+              <div className="text-[11px] md:text-xs text-slate-500 line-clamp-1 mt-0.5">
                 {card.subtitle}
               </div>
 
-              <div className="mt-2 text-[11px] font-bold text-[#FF5A18] flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                <span>เรียกช่าง</span>
+              <div className="mt-3 text-[11px] font-semibold text-blue-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition">
+                <span>เรียกบริการนี้</span>
                 <span>→</span>
               </div>
             </button>

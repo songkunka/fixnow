@@ -11,9 +11,9 @@ export default function TopContactBar() {
         {/* Logo Area (Left) */}
         <div className="flex items-center gap-2">
           <img
-            src="/assets/brand/logo.svg"
+            src="/assets/24carfix/logo_main.png"
             alt={BRAND_CONFIG.name}
-            className="h-9 sm:h-11 object-contain"
+            className="h-10 sm:h-12 object-contain"
           />
         </div>
 

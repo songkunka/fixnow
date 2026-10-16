@@ -64,12 +64,12 @@ export default function Navbar({ onOpenBooking, onOpenPartner }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-3 group shrink-0">
-          <div className="relative h-9 w-36 sm:h-10 sm:w-44 flex items-center">
+          <div className="relative h-9 w-32 sm:w-36 flex items-center">
             <Image
               src={logoSrc}
               alt={BRAND_CONFIG.assets.logo.alt}
               fill
-              sizes="(max-width: 768px) 144px, 176px"
+              sizes="(max-width: 768px) 128px, 144px"
               className="object-contain object-left group-hover:scale-[1.02] transition"
               priority
             />

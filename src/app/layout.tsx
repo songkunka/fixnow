@@ -1,19 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Anuphan, Manrope } from "next/font/google";
+import { Prompt, Inter } from "next/font/google";
 import { AuthProvider } from "@/contexts/AuthContext";
 import "./globals.css";
 
-const anuphan = Anuphan({
+const prompt = Prompt({
   subsets: ["thai", "latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-anuphan",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-prompt",
   display: "swap",
 });
 
-const manrope = Manrope({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "600", "700", "800"],
-  variable: "--font-manrope",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#17191C",
+  themeColor: "#070F2B",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -57,8 +57,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="th" className={`${anuphan.variable} ${manrope.variable} h-full`}>
-      <body className="min-h-full flex flex-col font-sans antialiased bg-[#F4F2ED] text-[#17191C]">
+    <html lang="th" className={`${prompt.variable} ${inter.variable} h-full`}>
+      <body className="min-h-full flex flex-col font-sans antialiased bg-slate-50 text-slate-900">
         <AuthProvider>
           {children}
         </AuthProvider>

@@ -23,16 +23,13 @@ export default function ServiceCarousel({ onOpenBooking }: ServiceCarouselProps)
   return (
     <section id="services" className="py-16 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4">
-        {/* Section Header - FixNow Brand CI style */}
+        {/* Section Header - matching 24carfix orange title style */}
         <div className="text-center mb-10">
-          <div className="inline-block text-xs font-bold text-[#FF5A18] bg-orange-100 px-3 py-1 rounded-full mb-2">
-            OUR EMERGENCY SERVICES
-          </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-[#17191C] mb-2">
-            บริการของเรา <span className="text-[#FF5A18]">ช่างซ่อมรถใกล้ฉัน 24 ชม.</span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-orange-600 mb-2">
+            บริการของเรา ร้านซ่อมรถใกล้ฉัน
           </h2>
-          <p className="text-sm md:text-base text-[#6E747B]">
-            เลือกบริการงานซ่อมที่คุณต้องการ ช่าง FixNow พร้อมเดินทางถึงที่ทุกจุดเกิดเหตุ
+          <p className="text-sm md:text-base text-slate-500">
+            เลือกบริการงานซ่อมที่คุณตามหา
           </p>
         </div>
 
