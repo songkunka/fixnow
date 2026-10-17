@@ -24,6 +24,8 @@ import {
   VEHICLE_CATEGORIES,
 } from "@/data/bookingServices";
 import { useUserLocation } from "@/contexts/LocationContext";
+import SubServiceInfoModal from "@/components/booking/SubServiceInfoModal";
+
 
 function DetailContent() {
   const searchParams = useSearchParams();
@@ -51,6 +53,7 @@ function DetailContent() {
   const [symptoms, setSymptoms] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [phoneError, setPhoneError] = useState("");
+  const [showTermsModal, setShowTermsModal] = useState(false);
 
   // Sync address from LocationContext if available
   useEffect(() => {
@@ -375,15 +378,33 @@ function DetailContent() {
               )}
             </button>
 
-            <p className="text-center text-[11px] text-slate-400 leading-tight">
-              การกดยืนยันเป็นการแจ้งความประสงค์ขอรับบริการ ช่างจะโทรยืนยันก่อนเดินทาง
+            <p className="text-center text-[11px] text-slate-500 leading-relaxed pt-1">
+              การกดยืนยันเรียกใช้บริการถือว่าคุณได้รับทราบและยอมรับ{" "}
+              <button
+                type="button"
+                onClick={() => setShowTermsModal(true)}
+                className="text-orange-600 underline font-semibold hover:text-orange-700 active:scale-95 transition"
+              >
+                เงื่อนไขการให้บริการ
+              </button>{" "}
+              แล้ว
             </p>
           </div>
         </div>
       </div>
+
+      {/* Terms of Service Modal */}
+      {subService && (
+        <SubServiceInfoModal
+          service={subService}
+          isOpen={showTermsModal}
+          onClose={() => setShowTermsModal(false)}
+        />
+      )}
     </div>
   );
 }
+
 
 export default function BookingDetailPage() {
   return (
