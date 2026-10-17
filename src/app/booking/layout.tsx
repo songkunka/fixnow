@@ -76,26 +76,28 @@ export default function BookingLayout({
         </main>
       </div>
 
-      {/* Mobile Bottom Nav */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-2xl pb-[calc(0.5rem+env(safe-area-inset-bottom,0px))]">
-        <div className="flex items-center justify-around py-1.5">
-          {SIDEBAR_LINKS.map((link) => {
-            const isActive = pathname === link.href || (pathname.startsWith(link.href) && link.href !== "#");
-            return (
-              <Link
-                key={link.label}
-                href={link.href}
-                className={`flex flex-col items-center justify-center min-h-[44px] min-w-[52px] gap-0.5 text-[10px] font-medium py-1 px-3 active:scale-95 transition ${
-                  isActive ? "text-orange-600 font-bold" : "text-slate-500 hover:text-slate-800"
-                }`}
-              >
-                <link.icon className="w-5 h-5" />
-                <span>{link.label}</span>
-              </Link>
-            );
-          })}
+      {/* Mobile Bottom Nav - Only shown on the main /booking index, hidden on wizard steps */}
+      {pathname === "/booking" && (
+        <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-2xl pb-[calc(0.5rem+env(safe-area-inset-bottom,0px))]">
+          <div className="flex items-center justify-around py-1.5">
+            {SIDEBAR_LINKS.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className={`flex flex-col items-center justify-center min-h-[44px] min-w-[52px] gap-0.5 text-[10px] font-medium py-1 px-3 active:scale-95 transition ${
+                    isActive ? "text-orange-600 font-bold" : "text-slate-500 hover:text-slate-800"
+                  }`}
+                >
+                  <link.icon className="w-5 h-5" />
+                  <span>{link.label}</span>
+                </Link>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

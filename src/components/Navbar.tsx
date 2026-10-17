@@ -84,11 +84,11 @@ export default function Navbar({ onOpenBooking, onOpenPartner }: NavbarProps) {
           {/* Desktop Location Badge */}
           <Link
             href="/location?returnUrl=/"
-            className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-50 hover:bg-orange-50 border border-slate-200 hover:border-orange-200 text-slate-700 hover:text-orange-600 transition text-xs font-semibold max-w-[210px] shadow-2xs group active:scale-[0.98]"
+            className="hidden lg:flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-full bg-slate-50 hover:bg-orange-50 border border-slate-200 hover:border-orange-200 text-slate-700 hover:text-orange-600 transition text-xs font-semibold max-w-[160px] xl:max-w-[210px] shadow-2xs group active:scale-[0.98] whitespace-nowrap shrink-0"
             title={location?.address || "ปักหมุดตำแหน่งของคุณ"}
           >
-            <div className="relative w-5 h-5 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 shrink-0 group-hover:bg-orange-500 group-hover:text-white transition duration-200">
-              <MapPin className="w-3 h-3" />
+            <div className="relative w-4 h-4 xl:w-5 xl:h-5 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 shrink-0 group-hover:bg-orange-500 group-hover:text-white transition duration-200">
+              <MapPin className="w-2.5 h-2.5 xl:w-3 xl:h-3" />
               <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-emerald-500 ring-1 ring-white animate-pulse" />
             </div>
             <span className="truncate">{location?.shortAddress || location?.address || "ปักหมุดตำแหน่ง"}</span>
@@ -114,18 +114,18 @@ export default function Navbar({ onOpenBooking, onOpenPartner }: NavbarProps) {
           </Link>
         </div>
 
-        {/* Desktop Navigation Links */}
-        <div className="hidden lg:flex items-center gap-1 text-sm font-medium text-slate-700">
+        {/* Desktop Navigation Links - Single line guaranteed */}
+        <div className="hidden lg:flex items-center gap-1 xl:gap-1.5 text-[13px] xl:text-sm font-semibold text-slate-700 shrink-0">
           {/* Mega Dropdown for Services */}
           <div className="relative">
             <button
               onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
               onMouseEnter={() => setServicesDropdownOpen(true)}
-              className="flex items-center gap-1.5 hover:text-orange-600 transition px-3 py-2 rounded-lg hover:bg-orange-50 border border-slate-200"
+              className="flex items-center gap-1 hover:text-orange-600 transition px-2.5 xl:px-3 py-1.5 xl:py-2 rounded-lg hover:bg-orange-50 border border-slate-200 whitespace-nowrap active:scale-[0.98]"
             >
               <span>บริการทั้งหมด</span>
               <ChevronDown
-                className={`w-4 h-4 transition-transform duration-200 ${
+                className={`w-3.5 h-3.5 transition-transform duration-200 ${
                   servicesDropdownOpen ? "rotate-180" : ""
                 }`}
               />
@@ -134,7 +134,7 @@ export default function Navbar({ onOpenBooking, onOpenPartner }: NavbarProps) {
             {servicesDropdownOpen && (
               <div
                 onMouseLeave={() => setServicesDropdownOpen(false)}
-                className="absolute left-0 mt-1 w-[480px] bg-white rounded-2xl shadow-2xl border border-slate-100 p-4 grid grid-cols-2 gap-2 z-50"
+                className="absolute left-0 mt-1 w-[480px] bg-white rounded-2xl shadow-2xl border border-slate-100 p-4 grid grid-cols-2 gap-2 z-50 animate-in fade-in zoom-in-95 duration-150"
               >
                 {BRAND_CONFIG.assets.services.slice(0, 8).map((svc) => (
                   <button
@@ -180,7 +180,7 @@ export default function Navbar({ onOpenBooking, onOpenPartner }: NavbarProps) {
                       setServicesDropdownOpen(false);
                       onOpenBooking();
                     }}
-                    className="hover:underline flex items-center gap-1"
+                    className="hover:underline flex items-center gap-1 font-semibold"
                   >
                     ดูบริการทั้งหมด 12 รายการ →
                   </button>
@@ -189,47 +189,39 @@ export default function Navbar({ onOpenBooking, onOpenPartner }: NavbarProps) {
             )}
           </div>
 
-          <a href="#services" className="hover:text-orange-600 transition px-3 py-2 rounded-lg hover:bg-orange-50">
-            อะไหล่รถยนต์
-          </a>
-
-          <a href="#mechanics" className="hover:text-orange-600 transition px-3 py-2 rounded-lg hover:bg-orange-50">
+          <a href="#mechanics" className="whitespace-nowrap hover:text-orange-600 transition px-2.5 xl:px-3 py-1.5 xl:py-2 rounded-lg hover:bg-orange-50">
             ผลงานช่าง
           </a>
 
-          <a href="#knowledge" className="hover:text-orange-600 transition px-3 py-2 rounded-lg hover:bg-orange-50">
+          <a href="#news" className="whitespace-nowrap hover:text-orange-600 transition px-2.5 xl:px-3 py-1.5 xl:py-2 rounded-lg hover:bg-orange-50">
             สาระน่ารู้
           </a>
 
-          <a href="#about" className="hover:text-orange-600 transition px-3 py-2 rounded-lg hover:bg-orange-50">
+          <a href="#about" className="whitespace-nowrap hover:text-orange-600 transition px-2.5 xl:px-3 py-1.5 xl:py-2 rounded-lg hover:bg-orange-50">
             เกี่ยวกับเรา
           </a>
 
-          <a href="#news" className="hover:text-orange-600 transition px-3 py-2 rounded-lg hover:bg-orange-50">
-            ข่าวสาร
-          </a>
-
-          <a href="#contact" className="hover:text-orange-600 transition px-3 py-2 rounded-lg hover:bg-orange-50">
+          <a href="#contact" className="whitespace-nowrap hover:text-orange-600 transition px-2.5 xl:px-3 py-1.5 xl:py-2 rounded-lg hover:bg-orange-50">
             ติดต่อเรา
           </a>
         </div>
 
         {/* Right Section: Primary Booking CTA + Customer Support + Auth */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 xl:gap-2 shrink-0">
           {/* Primary Action: Book Mechanic Online (Desktop Only) */}
           <Link
             href="/booking"
-            className="hidden lg:flex group items-center gap-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold text-sm px-4 py-2.5 rounded-full shadow-md shadow-orange-500/20 hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-200 active:scale-95"
+            className="hidden lg:flex group items-center gap-1.5 xl:gap-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold text-xs xl:text-sm px-3.5 xl:px-4 py-2 xl:py-2.5 rounded-full shadow-md shadow-orange-500/20 hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-200 active:scale-95 whitespace-nowrap shrink-0"
             title="เรียกช่างฉุกเฉินนอกสถานที่ 24 ชม."
           >
-            <Wrench className="w-4 h-4 group-hover:rotate-12 transition-transform duration-200" />
+            <Wrench className="w-3.5 h-3.5 xl:w-4 xl:h-4 group-hover:rotate-12 transition-transform duration-200" />
             <span>เรียกช่างด่วน</span>
           </Link>
 
           {/* Secondary Action: Customer Support */}
           <a
             href={`tel:${BRAND_CONFIG.hotline.replace(/-/g, "")}`}
-            className="hidden xl:flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-800 px-2.5 py-1.5 rounded-lg hover:bg-slate-100 transition"
+            className="hidden xl:flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-800 px-2 py-1.5 rounded-lg hover:bg-slate-100 transition whitespace-nowrap shrink-0"
             title="ติดต่อฝ่ายบริการลูกค้า FixNow"
           >
             <Headphones className="w-3.5 h-3.5 text-slate-400" />

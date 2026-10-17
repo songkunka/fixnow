@@ -43,7 +43,7 @@ function VehicleContent() {
   };
 
   return (
-    <div className="p-4 sm:p-6 md:p-10 pb-28 md:pb-12 max-w-4xl mx-auto">
+    <div className="p-4 sm:p-6 md:p-10 pb-36 sm:pb-32 max-w-4xl mx-auto">
       {/* Step 3 Stepper */}
       <BookingStepper
         currentStep={3}
@@ -188,18 +188,24 @@ function VehicleContent() {
         </div>
       </div>
 
-      {/* Sticky Bottom Next Button */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-md border-t border-slate-200 z-30">
-        <div className="max-w-4xl mx-auto flex items-center justify-between gap-4">
-          <div className="hidden sm:block">
-            <span className="text-xs text-slate-500 block">เตรียมข้อมูล</span>
-            <span className="text-sm font-bold text-slate-900">
-              ขั้นตอนที่ 3 จาก 4
+      {/* Sticky Bottom Next Button (Z-50 High Prominence Bar) */}
+      <div className="fixed bottom-0 left-0 right-0 p-3.5 sm:p-4 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] bg-white/95 backdrop-blur-md border-t border-slate-200/90 shadow-[0_-8px_30px_rgba(0,0,0,0.08)] z-50">
+        <div className="max-w-4xl mx-auto flex items-center justify-between gap-3 sm:gap-4">
+          {/* Quick Vehicle Summary & Step Indicator */}
+          <div className="flex flex-col min-w-0 pr-2">
+            <span className="text-[11px] font-bold text-orange-600 uppercase tracking-wider leading-none">
+              ขั้นตอน 3 จาก 4
+            </span>
+            <span className="text-xs sm:text-sm font-extrabold text-slate-800 truncate mt-1">
+              {currentCategoryObj.name} • {selectedSubtype ? (currentCategoryObj.subtypes.find(s => s.id === selectedSubtype)?.name || "ทั่วไป") : currentCategoryObj.subtypes[0]?.name || "ทั่วไป"}
+              {selectedBrand ? ` • ${selectedBrand}` : ""}
             </span>
           </div>
+
+          {/* Primary Proceed CTA */}
           <button
             onClick={handleProceed}
-            className="w-full sm:w-auto sm:min-w-[240px] bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-orange-500/20 hover:from-orange-600 hover:to-orange-700 active:scale-[0.98] transition flex items-center justify-center gap-2 text-sm sm:text-base ml-auto"
+            className="shrink-0 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 active:scale-[0.98] text-white font-bold py-3.5 px-5 sm:px-8 rounded-xl shadow-lg shadow-orange-500/25 transition flex items-center justify-center gap-2 text-sm sm:text-base ml-auto"
           >
             <span>ถัดไป: ข้อมูล & สรุป</span>
             <ArrowRight className="w-4 h-4" />
