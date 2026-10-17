@@ -198,7 +198,7 @@ function DetailContent() {
               }}
               placeholder="08X-XXX-XXXX"
               required
-              className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none text-base font-medium tracking-wide transition"
+              className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none text-base font-medium tracking-wide transition tabular-nums"
             />
             {phoneError && (
               <p className="text-xs text-rose-500 mt-1.5 flex items-center gap-1">
@@ -311,7 +311,7 @@ function DetailContent() {
                     {subService?.name || "บริการด่วน"}
                   </span>
                 </div>
-                <span className="text-base font-extrabold text-orange-600 shrink-0">
+                <span className="text-base font-extrabold text-orange-600 shrink-0 tabular-nums">
                   {subService?.priceFormatted || "฿850"}
                 </span>
               </div>
@@ -345,7 +345,7 @@ function DetailContent() {
                   <span className="text-sm font-bold text-slate-900">
                     ยอดประเมินเบื้องต้น
                   </span>
-                  <span className="text-2xl font-extrabold text-orange-600">
+                  <span className="text-2xl font-extrabold text-orange-600 tabular-nums">
                     {subService?.priceFormatted || "฿850"}
                   </span>
                 </div>

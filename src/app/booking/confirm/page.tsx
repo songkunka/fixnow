@@ -324,7 +324,7 @@ function ConfirmContent() {
               <span className="text-[11px] font-medium text-emerald-100 block">
                 เวลาที่คาดว่าจะถึง (ETA)
               </span>
-              <span className="text-3xl font-black font-mono tracking-tight block text-white mt-0.5">
+              <span className="text-3xl font-black font-mono tracking-tight block text-white mt-0.5 tabular-nums">
                 {formatTimer(secondsRemaining)}
               </span>
               <span className="text-[10px] text-emerald-200">
@@ -444,14 +444,14 @@ function ConfirmContent() {
               </div>
               <div>
                 <span className="text-slate-400 block text-[11px]">เบอร์ติดต่อของคุณ:</span>
-                <span className="font-bold text-slate-800 font-mono">
+                <span className="font-bold text-slate-800 font-mono tabular-nums">
                   {booking?.phone || "-"}
                 </span>
               </div>
               <div>
                 <span className="text-slate-400 block text-[11px]">วิธีชำระเงิน:</span>
                 <span className="font-bold text-emerald-600">
-                  ชำระเงินหน้างาน ({booking?.priceFormatted || "฿850"})
+                  ชำระเงินหน้างาน (<span className="tabular-nums">{booking?.priceFormatted || "฿850"}</span>)
                 </span>
               </div>
             </div>

@@ -58,7 +58,7 @@ export default function Footer({ onOpenBooking }: FooterProps) {
                 title="คลิกเพื่อคัดลอกเบอร์โทรฝ่ายบริการลูกค้า"
               >
                 <Phone className="w-3.5 h-3.5 text-slate-400 group-hover:text-orange-400 shrink-0" />
-                <span>ฝ่ายบริการลูกค้า: {BRAND_CONFIG.hotlineDisplay}</span>
+                <span>ฝ่ายบริการลูกค้า: <span className="tabular-nums font-medium">{BRAND_CONFIG.hotlineDisplay}</span></span>
                 {copiedItem === "phone" && (
                   <span className="text-[10px] text-emerald-400 flex items-center gap-0.5 animate-in fade-in duration-150">
                     <Check className="w-3 h-3" /> คัดลอกแล้ว
@@ -251,7 +251,7 @@ export default function Footer({ onOpenBooking }: FooterProps) {
 
           {/* Copyright notice */}
           <div className="text-xs text-slate-500 text-center sm:text-right">
-            © 2026 {BRAND_CONFIG.name.toUpperCase()}. All rights reserved.
+            © <span className="tabular-nums">2026</span> {BRAND_CONFIG.name.toUpperCase()}. All rights reserved.
           </div>
         </div>
       </div>

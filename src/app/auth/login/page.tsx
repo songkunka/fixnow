@@ -121,7 +121,7 @@ function LoginContent() {
                   value={phoneOrEmail}
                   onChange={(e) => setPhoneOrEmail(e.target.value)}
                   placeholder={loginMethod === "phone" ? "08X-XXX-XXXX" : "your@email.com"}
-                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none text-sm transition"
+                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none text-sm transition tabular-nums"
                   required
                 />
               </div>

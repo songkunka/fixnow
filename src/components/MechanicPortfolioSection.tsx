@@ -63,7 +63,7 @@ export default function MechanicPortfolioSection({
                 <span className="text-xl md:text-2xl font-extrabold text-slate-900">
                   {mechanic.fullName}
                 </span>
-                <span className="text-xs bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+                <span className="text-xs bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-full flex items-center gap-1 tabular-nums">
                   ⭐ 4.9/5 (140+ รีวิว)
                 </span>
               </div>
@@ -83,7 +83,7 @@ export default function MechanicPortfolioSection({
                   <div
                     key={idx}
                     onClick={onOpenMechanicProfile}
-                    className="relative w-16 h-12 md:w-20 md:h-14 rounded-lg overflow-hidden border border-slate-200 cursor-pointer hover:border-orange-500 transition"
+                    className="relative w-16 h-12 md:w-20 md:h-14 rounded-lg overflow-hidden border border-slate-200 cursor-pointer hover:border-orange-500 transition active:scale-95"
                   >
                     <Image
                       src={img}
@@ -98,7 +98,7 @@ export default function MechanicPortfolioSection({
 
               <button
                 onClick={onOpenMechanicProfile}
-                className="bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs md:text-sm px-6 py-2.5 rounded-xl transition shadow-md active:scale-95"
+                className="bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs md:text-sm px-6 py-2.5 rounded-xl transition shadow-md active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-orange-500"
               >
                 ดูโปรไฟล์และผลงานทั้งหมด →
               </button>

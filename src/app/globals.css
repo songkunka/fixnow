@@ -45,6 +45,50 @@ body {
   overflow-x: hidden;
 }
 
+/* Craft Floor: Themed Text Selection */
+::selection {
+  background-color: rgba(255, 90, 24, 0.2);
+  color: #7c2d12;
+}
+::-moz-selection {
+  background-color: rgba(255, 90, 24, 0.2);
+  color: #7c2d12;
+}
+
+/* Craft Floor: Themed Caret Color */
+input, textarea {
+  caret-color: #FF5A18;
+}
+
+/* Craft Floor: Accessible Focus Visible Indicator */
+:focus-visible {
+  outline: 2px solid #FF5A18;
+  outline-offset: 2px;
+}
+
+/* Craft Floor: Modern Slim Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ea580c;
+}
+
+/* Craft Floor: Numeric Stability for Timers and Pricing */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  -webkit-font-feature-settings: "tnum";
+  font-feature-settings: "tnum";
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-manrope), var(--font-anuphan), system-ui, sans-serif;
   letter-spacing: -0.015em;

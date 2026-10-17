@@ -99,7 +99,7 @@ export default function HeroBanner({ onOpenBooking }: HeroBannerProps) {
       <div className="flex justify-center -mt-4 sm:-mt-6 relative z-30 pb-6 sm:pb-8">
         <button
           onClick={() => onOpenBooking()}
-          className="animate-sheen bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-extrabold text-base sm:text-lg md:text-xl px-7 sm:px-10 py-3.5 sm:py-4 rounded-2xl shadow-2xl shadow-orange-500/40 active:scale-[0.97] transition-all duration-150 flex items-center gap-2.5 sm:gap-3 group"
+          className="animate-sheen bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-extrabold text-base sm:text-lg md:text-xl px-7 sm:px-10 py-3.5 sm:py-4 rounded-2xl shadow-[0_12px_28px_-6px_rgba(255,90,24,0.45),0_6px_12px_-4px_rgba(255,90,24,0.25)] active:scale-[0.97] focus-visible:ring-4 focus-visible:ring-orange-400/50 transition-all duration-150 flex items-center gap-2.5 sm:gap-3 group"
         >
           <Wrench className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:rotate-12 group-hover:scale-110 transition-transform duration-200" />
           <span>เรียกช่างฉุกเฉิน!</span>

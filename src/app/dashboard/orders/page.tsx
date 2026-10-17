@@ -31,17 +31,52 @@ export default function OrdersPage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!user) return;
     const fetchBookings = async () => {
-      const supabase = createClient();
-      const { data } = await supabase
-        .from("bookings")
-        .select("*")
-        .eq("customer_id", user.id)
-        .order("created_at", { ascending: false });
-      setBookings((data as Booking[]) || []);
+      let localBookings: Booking[] = [];
+      if (typeof window !== "undefined") {
+        try {
+          const raw = localStorage.getItem("fixnow_booking_history");
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            localBookings = parsed.map((item: any, idx: number) => ({
+              id: item.orderId || `order-${idx + 1}`,
+              service_type: item.service || item.category || "เรียกช่างฉุกเฉิน",
+              vehicle_type: `${item.vehicleType || "รถยนต์"} (${item.brand || "ทั่วไป"})`,
+              status: item.status === "searching" ? "accepted" : (item.status || "accepted"),
+              address: item.address || "ตำแหน่งปักหมุด",
+              phone: item.phone || "-",
+              symptoms: item.symptoms || null,
+              created_at: item.createdAt || new Date().toISOString(),
+            }));
+          }
+        } catch (e) {
+          console.error("Failed to load local booking history:", e);
+        }
+      }
+
+      if (user) {
+        try {
+          const supabase = createClient();
+          const { data } = await supabase
+            .from("bookings")
+            .select("*")
+            .eq("customer_id", user.id)
+            .order("created_at", { ascending: false });
+
+          if (data && data.length > 0) {
+            setBookings(data as Booking[]);
+            setIsLoading(false);
+            return;
+          }
+        } catch (err) {
+          console.error("Supabase error:", err);
+        }
+      }
+
+      setBookings(localBookings);
       setIsLoading(false);
     };
+
     fetchBookings();
   }, [user]);
 
@@ -58,21 +93,21 @@ export default function OrdersPage() {
           <p className="text-sm text-slate-500">กำลังโหลดข้อมูล...</p>
         </div>
       ) : bookings.length === 0 ? (
-        /* Empty State */
-        <div className="bg-white rounded-2xl border border-slate-200 p-8 text-center">
-          <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <ClipboardList className="w-8 h-8 text-slate-400" />
+        /* Functional Standard Empty State */
+        <div className="bg-white rounded-2xl border border-slate-200 p-8 text-center max-w-md mx-auto">
+          <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3">
+            <ClipboardList className="w-6 h-6 text-slate-400" />
           </div>
-          <h3 className="font-semibold text-slate-700 mb-1">ยังไม่มีประวัติการจอง</h3>
-          <p className="text-sm text-slate-500 mb-4">
-            เมื่อคุณเรียกช่างหรือจองบริการ ประวัติจะแสดงที่นี่
+          <h3 className="font-bold text-slate-800 text-base mb-1">ยังไม่มีรายการเรียกช่าง</h3>
+          <p className="text-xs text-slate-500 mb-5">
+            เมื่อคุณส่งคำขอเรียกช่างฉุกเฉิน รายการจะถูกบันทึกและแสดงที่นี่
           </p>
           <Link
             href="/booking"
-            className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 active:scale-95 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-md shadow-orange-500/20 transition"
           >
             <Wrench className="w-4 h-4" />
-            เรียกช่างเลย
+            เรียกช่างฉุกเฉิน
           </Link>
         </div>
       ) : (
@@ -100,7 +135,7 @@ export default function OrdersPage() {
                   </div>
                   <div className="flex items-center gap-2">
                     <Calendar className="w-3.5 h-3.5 text-slate-400" />
-                    <span>{new Date(booking.created_at).toLocaleString("th-TH")}</span>
+                    <span className="tabular-nums">{new Date(booking.created_at).toLocaleString("th-TH")}</span>
                   </div>
                   {booking.symptoms && (
                     <p className="text-slate-500 mt-1">อาการ: {booking.symptoms}</p>

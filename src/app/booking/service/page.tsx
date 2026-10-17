@@ -94,7 +94,7 @@ function BookingServiceContent() {
                       setInfoModalService(service);
                     }}
                     aria-label="ดูรายละเอียดบริการ"
-                    className="p-1 rounded-full text-slate-400 hover:text-orange-600 hover:bg-orange-50 active:scale-95 transition shrink-0"
+                    className="w-7 h-7 flex items-center justify-center rounded-full text-slate-400 hover:text-orange-600 hover:bg-orange-50 active:scale-90 transition shrink-0"
                   >
                     <Info className="w-4 h-4" />
                   </button>
@@ -112,7 +112,7 @@ function BookingServiceContent() {
                   <span className="text-xs text-slate-400 block font-normal">
                     ราคาเริ่มต้น
                   </span>
-                  <span className="text-lg sm:text-xl font-extrabold text-orange-600 tracking-tight">
+                  <span className="text-lg sm:text-xl font-extrabold text-orange-600 tracking-tight tabular-nums">
                     {service.priceFormatted}
                   </span>
                 </div>

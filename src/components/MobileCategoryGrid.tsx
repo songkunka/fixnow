@@ -26,7 +26,7 @@ export default function MobileCategoryGrid({ onOpenBooking }: MobileCategoryGrid
             key={svc.id}
             href={`/booking/service?category=${svc.id}`}
             onClick={() => onOpenBooking?.(svc.id)}
-            className="flex flex-col items-center text-center group active:scale-95 transition"
+            className="flex flex-col items-center text-center group active:scale-[0.96] transition-transform duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 rounded-2xl"
           >
             <div className="relative w-14 h-14 rounded-2xl bg-slate-50 border border-slate-100/80 flex items-center justify-center p-2 group-hover:bg-orange-50 group-hover:border-orange-200 transition mb-1.5 shadow-2xs">
               <Image

@@ -80,7 +80,7 @@ export default function ProfilePage() {
               <label className="block text-sm font-semibold text-slate-700 mb-1.5">เบอร์โทรศัพท์</label>
               <div className="relative">
                 <PhoneCall className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="08X-XXX-XXXX" className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none text-sm transition" />
+                <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="08X-XXX-XXXX" className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none text-sm transition tabular-nums" />
               </div>
             </div>
           </div>
@@ -88,7 +88,7 @@ export default function ProfilePage() {
           <button
             type="submit"
             disabled={isSaving}
-            className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-3.5 rounded-xl transition shadow-lg shadow-orange-500/20 disabled:opacity-60 flex items-center justify-center gap-2"
+            className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 active:scale-[0.98] text-white font-bold py-3.5 rounded-xl transition shadow-lg shadow-orange-500/20 disabled:opacity-60 flex items-center justify-center gap-2"
           >
             {isSaving ? (
               <>

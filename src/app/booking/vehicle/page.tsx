@@ -64,7 +64,7 @@ function VehicleContent() {
           </div>
           <div className="text-right shrink-0">
             <span className="text-xs text-slate-500 block">ราคาเริ่มต้น</span>
-            <span className="text-base sm:text-lg font-extrabold text-orange-600">
+            <span className="text-base sm:text-lg font-extrabold text-orange-600 tabular-nums">
               {selectedSubService.priceFormatted}
             </span>
           </div>
