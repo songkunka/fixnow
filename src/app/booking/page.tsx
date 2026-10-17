@@ -3,8 +3,13 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Headphones } from "lucide-react";
+
+
 import { SERVICE_CATEGORIES } from "@/data/bookingServices";
 import BookingStepper from "@/components/booking/BookingStepper";
+import { BRAND_CONFIG } from "@/config/branding";
+
 
 export default function BookingPage() {
   return (
@@ -68,10 +73,12 @@ export default function BookingPage() {
           </p>
         </div>
         <a
-          href="tel:0000000000"
-          className="shrink-0 bg-orange-500 hover:bg-orange-600 active:scale-95 text-white text-xs sm:text-sm font-bold px-5 py-2.5 rounded-xl transition"
+          href={`tel:${BRAND_CONFIG.hotline.replace(/-/g, "")}`}
+          className="shrink-0 bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 hover:text-white border border-slate-700 text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-xl transition flex items-center gap-1.5"
+          title="ติดต่อสอบถามการใช้งานแพลตฟอร์ม"
         >
-          สายด่วนฉุกเฉิน 24 ชม.
+          <Headphones className="w-3.5 h-3.5 text-slate-400" />
+          <span>ฝ่ายบริการลูกค้า</span>
         </a>
       </div>
     </div>

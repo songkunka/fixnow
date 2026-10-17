@@ -188,10 +188,10 @@ export default function ZeroMockupMechanicSection({
 
               <a
                 href={`tel:${BRAND_CONFIG.hotline.replace(/-/g, "")}`}
-                className="bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm px-5 py-3 rounded-xl flex items-center gap-2 active:scale-95 transition"
+                className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm px-5 py-3 rounded-xl flex items-center gap-2 active:scale-95 transition"
               >
-                <PhoneCall className="w-4 h-4 text-amber-400" />
-                <span>โทรติดต่อศูนย์ควบคุม 24 ชม.</span>
+                <PhoneCall className="w-4 h-4 text-slate-500" />
+                <span>ติดต่อฝ่ายบริการลูกค้า</span>
               </a>
             </div>
           </div>

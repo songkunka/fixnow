@@ -36,13 +36,13 @@ export default function Footer({ onOpenBooking }: FooterProps) {
           {/* Column 1: Platform Info & Contacts */}
           <div className="space-y-4">
             <p className="text-xs text-slate-400 leading-relaxed font-normal">
-              แพลตฟอร์มรวมช่างซ่อมรถมืออาชีพทั่วไทย บริการถึงที่ 24 ชั่วโมง
+              แพลตฟอร์มดิจิทัลตัวกลางเชื่อมต่อช่างซ่อมรถมืออาชีพและรถยกฉุกเฉิน 24 ชม. ครอบคลุม 77 จังหวัดทั่วไทย
             </p>
-            <div className="space-y-2 text-xs">
+            <div className="space-y-2.5 text-xs">
               <button
                 onClick={(e) => handleCopy(e, BRAND_CONFIG.supportEmail, "email")}
                 className="flex items-center gap-2.5 text-slate-300 hover:text-white transition group text-left"
-                title="คลิกเพื่อคัดลอกอีเมล"
+                title="คลิกเพื่อคัดลอกอีเมลฝ่ายบริการลูกค้า"
               >
                 <Mail className="w-3.5 h-3.5 text-slate-400 group-hover:text-orange-400 shrink-0" />
                 <span>{BRAND_CONFIG.supportEmail}</span>
@@ -55,10 +55,10 @@ export default function Footer({ onOpenBooking }: FooterProps) {
               <button
                 onClick={(e) => handleCopy(e, BRAND_CONFIG.hotline.replace(/-/g, ""), "phone")}
                 className="flex items-center gap-2.5 text-slate-300 hover:text-white transition group text-left"
-                title="คลิกเพื่อคัดลอกเบอร์โทร"
+                title="คลิกเพื่อคัดลอกเบอร์โทรฝ่ายบริการลูกค้า"
               >
                 <Phone className="w-3.5 h-3.5 text-slate-400 group-hover:text-orange-400 shrink-0" />
-                <span>{BRAND_CONFIG.hotlineDisplay}</span>
+                <span>ฝ่ายบริการลูกค้า: {BRAND_CONFIG.hotlineDisplay}</span>
                 {copiedItem === "phone" && (
                   <span className="text-[10px] text-emerald-400 flex items-center gap-0.5 animate-in fade-in duration-150">
                     <Check className="w-3 h-3" /> คัดลอกแล้ว

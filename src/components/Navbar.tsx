@@ -17,6 +17,7 @@ import {
   LayoutDashboard,
   ClipboardList,
   MapPin,
+  Headphones,
 } from "lucide-react";
 import { BRAND_CONFIG, getAssetUrl } from "@/config/branding";
 import { useAuth } from "@/contexts/AuthContext";
@@ -195,20 +196,28 @@ export default function Navbar({ onOpenBooking, onOpenPartner }: NavbarProps) {
           </a>
         </div>
 
-        {/* Right Section: Phone CTA + Auth */}
+        {/* Right Section: Primary Booking CTA + Customer Support + Auth */}
         <div className="flex items-center gap-2.5">
+          {/* Primary Action: Book Mechanic Online */}
+          <Link
+            href="/booking"
+            className="group flex items-center gap-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold text-sm px-4 py-2.5 rounded-full shadow-md shadow-orange-500/20 hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-200 active:scale-95"
+            title="เรียกช่างฉุกเฉินนอกสถานที่ 24 ชม."
+          >
+            <Wrench className="w-4 h-4 group-hover:rotate-12 transition-transform duration-200" />
+            <span>เรียกช่างด่วน</span>
+          </Link>
+
+          {/* Secondary Action: Customer Support */}
           <a
             href={`tel:${BRAND_CONFIG.hotline.replace(/-/g, "")}`}
-            className="relative group flex items-center gap-2 border-2 border-orange-500 bg-orange-50/60 hover:bg-orange-500 text-orange-600 hover:text-white font-bold text-sm px-4 py-2 rounded-full transition-all duration-200 active:scale-95 shadow-sm hover:shadow-orange-500/20"
-            title={`โทรสายด่วนฉุกเฉิน ${BRAND_CONFIG.hotlineDisplay}`}
+            className="hidden xl:flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-800 px-2.5 py-1.5 rounded-lg hover:bg-slate-100 transition"
+            title="ติดต่อฝ่ายบริการลูกค้า FixNow"
           >
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-orange-500 group-hover:bg-white"></span>
-            </span>
-            <PhoneCall className="w-4 h-4" />
-            <span className="hidden sm:inline tracking-tight">{BRAND_CONFIG.hotlineDisplay}</span>
+            <Headphones className="w-3.5 h-3.5 text-slate-400" />
+            <span>ฝ่ายบริการลูกค้า</span>
           </a>
+
 
           {/* Auth Button / User Avatar */}
           {!isLoading && (
@@ -334,16 +343,14 @@ export default function Navbar({ onOpenBooking, onOpenPartner }: NavbarProps) {
             </Link>
           )}
 
-          <button
-            onClick={() => {
-              setMobileMenuOpen(false);
-              onOpenBooking();
-            }}
-            className="w-full text-left font-semibold text-orange-600 px-3 py-2 rounded-lg bg-orange-50 flex items-center justify-between"
+          <Link
+            href="/booking"
+            onClick={() => setMobileMenuOpen(false)}
+            className="w-full text-center font-bold text-white px-4 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 shadow-md shadow-orange-500/20 flex items-center justify-center gap-2 mb-2 active:scale-[0.98] transition"
           >
-            <span>🚨 เรียกช่างฉุกเฉิน 24 ชั่วโมง</span>
-            <span>→</span>
-          </button>
+            <Wrench className="w-4 h-4" />
+            <span>เรียกช่างด่วนออนไลน์ 24 ชม.</span>
+          </Link>
 
           {user && (
             <>
@@ -378,8 +385,10 @@ export default function Navbar({ onOpenBooking, onOpenPartner }: NavbarProps) {
           )}
 
           <div className="pt-2 border-t border-slate-100 flex items-center justify-between px-3 text-xs text-slate-500">
-            <span>สายด่วน: {BRAND_CONFIG.hotlineDisplay}</span>
-            <span>LINE: {BRAND_CONFIG.lineId}</span>
+            <span>ฝ่ายบริการลูกค้า: {BRAND_CONFIG.hotlineDisplay}</span>
+            <a href={BRAND_CONFIG.lineUrl} target="_blank" rel="noreferrer" className="text-emerald-600 font-semibold hover:underline">
+              LINE Support
+            </a>
           </div>
         </div>
       )}

@@ -15,7 +15,7 @@ export default function TopContactBar() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
-            <span className="font-semibold text-emerald-400">ระบบพร้อมให้บริการ 24 ชม.</span>
+            <span className="font-semibold text-emerald-400">แพลตฟอร์มช่วยเหลือรถเสียฉุกเฉิน 24 ชม.</span>
           </div>
 
           <div className="hidden lg:flex items-center gap-3 text-slate-400">
@@ -73,13 +73,14 @@ export default function TopContactBar() {
 
           <span className="text-slate-700">|</span>
 
-          {/* Hotline Quick Link */}
+          {/* Customer Support Quick Link */}
           <a
             href={`tel:${BRAND_CONFIG.hotline.replace(/-/g, "")}`}
-            className="flex items-center gap-1.5 text-orange-400 hover:text-orange-300 font-semibold transition"
+            className="flex items-center gap-1.5 text-slate-300 hover:text-orange-400 transition"
+            title="ติดต่อฝ่ายบริการลูกค้า"
           >
-            <PhoneCall className="w-3.5 h-3.5 text-orange-500" />
-            <span>สายด่วน: {BRAND_CONFIG.hotlineDisplay}</span>
+            <PhoneCall className="w-3.5 h-3.5 text-slate-400" />
+            <span>ฝ่ายบริการลูกค้า: {BRAND_CONFIG.hotlineDisplay}</span>
           </a>
         </div>
       </div>
