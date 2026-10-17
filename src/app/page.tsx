@@ -16,42 +16,36 @@ import MobileLocationBar from "@/components/MobileLocationBar";
 import MobileFeaturedServices from "@/components/MobileFeaturedServices";
 import MobileCategoryGrid from "@/components/MobileCategoryGrid";
 import MobileBottomNav from "@/components/MobileBottomNav";
-import LocationPermissionModal from "@/components/LocationPermissionModal";
 import { useUserLocation } from "@/contexts/LocationContext";
 
 export default function HomePage() {
   const router = useRouter();
-  const { location, requestCurrentLocation, isRequestingLocation } = useUserLocation();
-  const [showPermissionModal, setShowPermissionModal] = useState(false);
+  const { location, requestCurrentLocation } = useUserLocation();
 
-  // Check and prompt location permission once on first visit if no location is set
+  // Directly send the REAL browser command to request permission on first entry
   useEffect(() => {
-    try {
-      const sessionDismissed = sessionStorage.getItem("fixnow_home_geo_dismissed");
-      if (!location && !sessionDismissed) {
-        const timer = setTimeout(() => {
-          setShowPermissionModal(true);
-        }, 500);
-        return () => clearTimeout(timer);
-      }
-    } catch {
-      // ignore storage errors
+    // If we already have a real GPS location or manual pin, don't ask again
+    if (location?.isRealGps || location?.isManualPin) {
+      return;
     }
-  }, [location]);
 
-  const handleAllowLocation = async (remember: boolean) => {
-    await requestCurrentLocation(remember);
-    setShowPermissionModal(false);
-  };
-
-  const handleDenyLocation = () => {
-    setShowPermissionModal(false);
     try {
-      sessionStorage.setItem("fixnow_home_geo_dismissed", "true");
+      const sessionAttempted = sessionStorage.getItem("fixnow_home_geo_attempted");
+      if (sessionAttempted) return;
     } catch {
       // ignore
     }
-  };
+
+    const timer = setTimeout(() => {
+      try {
+        sessionStorage.setItem("fixnow_home_geo_attempted", "true");
+      } catch {}
+      // Execute the REAL native browser permission command!
+      requestCurrentLocation(true).catch(() => {});
+    }, 600);
+
+    return () => clearTimeout(timer);
+  }, [location, requestCurrentLocation]);
 
   // Navigate to full-page booking instead of opening modal
   const handleOpenBooking = (serviceId?: string) => {
@@ -69,13 +63,6 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 lg:bg-white text-slate-900 pb-16 lg:pb-0">
-      {/* Permission Modal on Initial Homepage Entry */}
-      <LocationPermissionModal
-        isOpen={showPermissionModal}
-        onAllow={handleAllowLocation}
-        onDeny={handleDenyLocation}
-        isLocating={isRequestingLocation}
-      />
       {/* 1. Mobile Top Location Bar (24carfix style top bar) */}
       <MobileLocationBar />
 

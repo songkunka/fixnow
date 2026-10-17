@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef, useCallback, Suspense } from "react
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChevronLeft, Search, Crosshair, MapPin, X, Loader2, Navigation, Check } from "lucide-react";
 import { useUserLocation, formatShortAddress } from "@/contexts/LocationContext";
-import LocationPermissionModal from "@/components/LocationPermissionModal";
 
 // Default coordinates: Democracy Monument, Bangkok (same as 24carfix default)
 const DEFAULT_LAT = 13.7563;
@@ -28,34 +27,16 @@ function LocationPickerContent() {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null);
   const [coords, setCoords] = useState<{ lat: number; lng: number }>(() => {
-    if (location && location.lat && location.lng) {
+    if (location && location.lat && location.lng && (location.isRealGps || location.isManualPin)) {
       return { lat: location.lat, lng: location.lng };
-    }
-    if (typeof window !== "undefined") {
-      try {
-        const saved = localStorage.getItem("fixnow_user_location");
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          if (parsed?.lat && parsed?.lng) {
-            return { lat: parsed.lat, lng: parsed.lng };
-          }
-        }
-      } catch {}
     }
     return { lat: DEFAULT_LAT, lng: DEFAULT_LNG };
   });
 
   // UI state
   const [address, setAddress] = useState<string>(() => {
-    if (location?.address) return location.address;
-    if (typeof window !== "undefined") {
-      try {
-        const saved = localStorage.getItem("fixnow_user_location");
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          if (parsed?.address) return parsed.address;
-        }
-      } catch {}
+    if (location?.address && (location.isRealGps || location.isManualPin)) {
+      return location.address;
     }
     return "อนุสาวรีย์ประชาธิปไตย, ถนนราชดำเนินกลาง, เขตพระนคร, กรุงเทพมหานคร";
   });
@@ -63,7 +44,6 @@ function LocationPickerContent() {
   const [isPinBouncing, setIsPinBouncing] = useState(false);
   const [showRadarRipple, setShowRadarRipple] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
-  const [showPermissionModal, setShowPermissionModal] = useState(false);
   const [isLocatingUser, setIsLocatingUser] = useState(false);
 
   // Search state
@@ -197,26 +177,25 @@ function LocationPickerContent() {
     };
   }, [fetchAddress]);
 
-  // Prompt user for location permission if they do not have a saved location yet
+  // Directly send the REAL browser geolocation command when user enters /location
   useEffect(() => {
-    let hasSavedLocation = !!(location && location.lat && location.lng);
-    if (!hasSavedLocation && typeof window !== "undefined") {
-      try {
-        const saved = localStorage.getItem("fixnow_user_location");
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          if (parsed?.lat && parsed?.lng) hasSavedLocation = true;
-        }
-      } catch {}
+    // If the user already has real GPS or manual pin, fly map to it once ready
+    if (location && (location.isRealGps || location.isManualPin)) {
+      setCoords({ lat: location.lat, lng: location.lng });
+      setAddress(location.address);
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.flyTo([location.lat, location.lng], 17, { duration: 1 });
+      }
+      return;
     }
 
-    if (!hasSavedLocation) {
-      const timer = setTimeout(() => {
-        setShowPermissionModal(true);
-      }, 350);
-      return () => clearTimeout(timer);
-    }
-  }, [location]);
+    // Otherwise, immediately send the REAL browser command to get real GPS!
+    const timer = setTimeout(() => {
+      handleRequestLocation(true);
+    }, 450);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   // Request native GPS location and smoothly animate map to user
   const handleRequestLocation = async (remember = true) => {
@@ -234,7 +213,6 @@ function LocationPickerContent() {
       }
     } finally {
       setIsLocatingUser(false);
-      setShowPermissionModal(false);
     }
   };
 
@@ -295,6 +273,7 @@ function LocationPickerContent() {
       lng: coords.lng,
       address,
       shortAddress: formatShortAddress(address),
+      isRealGps: true,
     });
     setTimeout(() => {
       router.push(returnUrl);
@@ -466,14 +445,6 @@ function LocationPickerContent() {
           )}
         </button>
       </div>
-
-      {/* Location Permission Modal Dialog (Reusable 3-button 24carfix style) */}
-      <LocationPermissionModal
-        isOpen={showPermissionModal}
-        onAllow={handleRequestLocation}
-        onDeny={() => setShowPermissionModal(false)}
-        isLocating={isLocatingUser || isRequestingLocation}
-      />
     </div>
   );
 }

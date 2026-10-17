@@ -7,6 +7,8 @@ export interface UserLocation {
   lng: number;
   address: string;
   shortAddress: string;
+  isRealGps?: boolean;
+  isManualPin?: boolean;
   updatedAt: string;
 }
 
@@ -14,7 +16,7 @@ interface LocationContextType {
   location: UserLocation | null;
   isPinned: boolean;
   isRequestingLocation: boolean;
-  setPinnedLocation: (loc: { lat: number; lng: number; address: string; shortAddress?: string }) => void;
+  setPinnedLocation: (loc: { lat: number; lng: number; address: string; shortAddress?: string; isRealGps?: boolean }) => void;
   requestCurrentLocation: (remember?: boolean) => Promise<UserLocation | null>;
   clearLocation: () => void;
 }
@@ -68,13 +70,25 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     // Read from localStorage on mount
     try {
-      // Clear legacy blocking flag if present
       localStorage.removeItem("fixnow_geo_prompt_shown");
+      localStorage.removeItem("fixnow_home_geo_dismissed");
 
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        setLocation(parsed);
+        // Clear old dummy Bangkok coordinates if not from real GPS or manual user pin
+        const isDummyBangkok =
+          Math.abs(parsed.lat - 13.7563) < 0.001 &&
+          Math.abs(parsed.lng - 100.5018) < 0.001 &&
+          !parsed.isRealGps &&
+          !parsed.isManualPin;
+
+        if (isDummyBangkok) {
+          localStorage.removeItem(STORAGE_KEY);
+          setLocation(null);
+        } else {
+          setLocation(parsed);
+        }
       }
     } catch {
       // ignore JSON errors
@@ -82,8 +96,8 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
 
     // Listen for custom event
     const handleLocationChange = (e: Event) => {
-      const customEvent = e as CustomEvent<UserLocation>;
-      if (customEvent.detail) {
+      const customEvent = e as CustomEvent<UserLocation | null>;
+      if (customEvent.detail !== undefined) {
         setLocation(customEvent.detail);
       }
     };
@@ -94,13 +108,15 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  const setPinnedLocation = (loc: { lat: number; lng: number; address: string; shortAddress?: string }) => {
+  const setPinnedLocation = (loc: { lat: number; lng: number; address: string; shortAddress?: string; isRealGps?: boolean }) => {
     const short = loc.shortAddress || formatShortAddress(loc.address);
     const newLoc: UserLocation = {
       lat: loc.lat,
       lng: loc.lng,
       address: loc.address,
       shortAddress: short,
+      isRealGps: loc.isRealGps ?? false,
+      isManualPin: true,
       updatedAt: new Date().toISOString(),
     };
 
@@ -115,6 +131,7 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
 
   const requestCurrentLocation = async (remember = true): Promise<UserLocation | null> => {
     if (typeof window === "undefined" || !("geolocation" in navigator)) {
+      console.warn("Geolocation is not supported by this browser.");
       return null;
     }
 
@@ -125,6 +142,8 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
         async (position) => {
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
+          console.log("Real GPS Coordinates received:", lat, lng);
+
           const fullAddress = await fetchReverseGeocode(lat, lng);
           const short = formatShortAddress(fullAddress);
 
@@ -133,6 +152,8 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
             lng,
             address: fullAddress,
             shortAddress: short,
+            isRealGps: true,
+            isManualPin: false,
             updatedAt: new Date().toISOString(),
           };
 
@@ -151,11 +172,11 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
           resolve(newLoc);
         },
         (error) => {
-          console.warn("Geolocation request failed or was denied:", error);
+          console.warn("Browser Geolocation permission denied or failed:", error.code, error.message);
           setIsRequestingLocation(false);
           resolve(null);
         },
-        { enableHighAccuracy: true, timeout: 8000 }
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
       );
     });
   };
