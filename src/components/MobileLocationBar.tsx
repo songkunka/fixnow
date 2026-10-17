@@ -18,18 +18,19 @@ export default function MobileLocationBar() {
       {/* Location Selector (Matching 24carfix mobile top bar) */}
       <Link
         href="/location?returnUrl=/"
-        className="flex items-center gap-2.5 flex-1 min-w-0 pr-3 active:opacity-75 transition"
+        className="flex items-center gap-2.5 flex-1 min-w-0 pr-3 active:scale-[0.99] transition-all duration-150 group"
       >
-        <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-orange-500 to-orange-600 text-white flex items-center justify-center shrink-0 shadow-md shadow-orange-500/20">
+        <div className="relative w-9 h-9 rounded-full bg-gradient-to-tr from-orange-500 to-orange-600 text-white flex items-center justify-center shrink-0 shadow-md shadow-orange-500/20 group-hover:scale-105 transition-transform duration-200">
           <MapPin className="w-5 h-5" />
+          <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white animate-pulse" />
         </div>
         <div className="flex-1 min-w-0">
-          <div className="text-[11px] text-slate-400 font-medium leading-none mb-1">
-            ตำแหน่งของคุณ
+          <div className="flex items-center gap-1.5 text-[11px] text-slate-400 font-medium leading-none mb-1">
+            <span>ตำแหน่งของคุณ</span>
           </div>
           <div className="flex items-center gap-1 text-slate-800 font-bold text-xs sm:text-sm truncate leading-tight">
             <span className="truncate">{displayLocation}</span>
-            <ChevronDown className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+            <ChevronDown className="w-3.5 h-3.5 text-slate-400 shrink-0 group-hover:translate-y-0.5 transition-transform duration-200" />
           </div>
         </div>
       </Link>

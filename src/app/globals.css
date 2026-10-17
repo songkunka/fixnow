@@ -100,3 +100,98 @@ h1, h2, h3, h4, h5, h6 {
 .animate-pulse-ring {
   animation: pulse-ring 2.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
 }
+
+/* Subtle Ambient Sheen Pass (Runs every 6s on Emergency CTA) */
+@keyframes light-sheen {
+  0%, 75% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+.animate-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.animate-sheen::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.28),
+    transparent
+  );
+  animation: light-sheen 6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  pointer-events: none;
+}
+
+/* Soft Hotline Beacon Ring (Breathing ring for 24h Emergency Hotline) */
+@keyframes beacon-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.45);
+  }
+  60% {
+    box-shadow: 0 0 0 10px rgba(22, 163, 74, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
+  }
+}
+
+.animate-beacon {
+  animation: beacon-ring 4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+/* Single Radar Ripple when Pin Settles */
+@keyframes radar-ripple {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.animate-radar-ripple {
+  animation: radar-ripple 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Gentle Wave Shimmer for Volunteer Flood Card */
+@keyframes wave-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-wave-shimmer {
+  background-size: 200% 200%;
+  animation: wave-gradient 8s ease infinite;
+}
+
+/* Respect Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  .animate-sheen::after,
+  .animate-beacon,
+  .animate-radar-ripple,
+  .animate-wave-shimmer,
+  .animate-pulse-ring {
+    animation: none !important;
+  }
+}
+

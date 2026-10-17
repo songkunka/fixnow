@@ -35,16 +35,21 @@ export default function MobileBottomNav() {
             >
               {/* Icon Container with Badge */}
               <div className="relative">
-                <item.icon className={`w-5 h-5 ${isActive ? "stroke-[2.5]" : "stroke-2"}`} />
+                <item.icon className={`w-5 h-5 transition-transform duration-200 ${isActive ? "stroke-[2.5] scale-105" : "stroke-2"}`} />
                 {item.badge && (
-                  <span className="absolute -top-1 -right-1.5 w-2 h-2 rounded-full bg-red-500 ring-2 ring-white" />
+                  <span className="absolute -top-1 -right-1.5 w-2 h-2 rounded-full bg-red-500 ring-2 ring-white animate-pulse" />
                 )}
               </div>
 
               {/* Label */}
-              <span className={`text-[10px] leading-none ${isActive ? "font-bold" : "font-medium"}`}>
+              <span className={`text-[10px] leading-none transition-colors duration-200 ${isActive ? "font-bold text-[#FF5A18]" : "font-medium"}`}>
                 {item.label}
               </span>
+
+              {/* Active Indicator Dot */}
+              {isActive && (
+                <span className="w-1 h-1 rounded-full bg-[#FF5A18] mt-0.5 animate-in fade-in zoom-in duration-200" />
+              )}
             </Link>
           );
         })}

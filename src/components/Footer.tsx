@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { Mail, Phone, Globe } from "lucide-react";
+import { Mail, Phone, Globe, Check } from "lucide-react";
 import { BRAND_CONFIG } from "@/config/branding";
 
 interface FooterProps {
@@ -11,9 +11,20 @@ interface FooterProps {
 }
 
 export default function Footer({ onOpenBooking }: FooterProps) {
+  const [copiedItem, setCopiedItem] = useState<string | null>(null);
+
   const handleBooking = (category?: string) => {
     if (onOpenBooking) {
       onOpenBooking(category);
+    }
+  };
+
+  const handleCopy = (e: React.MouseEvent, text: string, type: string) => {
+    e.preventDefault();
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+      setCopiedItem(type);
+      setTimeout(() => setCopiedItem(null), 2000);
     }
   };
 
@@ -28,20 +39,32 @@ export default function Footer({ onOpenBooking }: FooterProps) {
               แพลตฟอร์มรวมช่างซ่อมรถมืออาชีพทั่วไทย บริการถึงที่ 24 ชั่วโมง
             </p>
             <div className="space-y-2 text-xs">
-              <a
-                href={`mailto:${BRAND_CONFIG.supportEmail}`}
-                className="flex items-center gap-2.5 text-slate-300 hover:text-white transition"
+              <button
+                onClick={(e) => handleCopy(e, BRAND_CONFIG.supportEmail, "email")}
+                className="flex items-center gap-2.5 text-slate-300 hover:text-white transition group text-left"
+                title="คลิกเพื่อคัดลอกอีเมล"
               >
-                <Mail className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                <Mail className="w-3.5 h-3.5 text-slate-400 group-hover:text-orange-400 shrink-0" />
                 <span>{BRAND_CONFIG.supportEmail}</span>
-              </a>
-              <a
-                href={`tel:${BRAND_CONFIG.hotline.replace(/-/g, "")}`}
-                className="flex items-center gap-2.5 text-slate-300 hover:text-white transition"
+                {copiedItem === "email" && (
+                  <span className="text-[10px] text-emerald-400 flex items-center gap-0.5 animate-in fade-in duration-150">
+                    <Check className="w-3 h-3" /> คัดลอกแล้ว
+                  </span>
+                )}
+              </button>
+              <button
+                onClick={(e) => handleCopy(e, BRAND_CONFIG.hotline.replace(/-/g, ""), "phone")}
+                className="flex items-center gap-2.5 text-slate-300 hover:text-white transition group text-left"
+                title="คลิกเพื่อคัดลอกเบอร์โทร"
               >
-                <Phone className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                <Phone className="w-3.5 h-3.5 text-slate-400 group-hover:text-orange-400 shrink-0" />
                 <span>{BRAND_CONFIG.hotlineDisplay}</span>
-              </a>
+                {copiedItem === "phone" && (
+                  <span className="text-[10px] text-emerald-400 flex items-center gap-0.5 animate-in fade-in duration-150">
+                    <Check className="w-3 h-3" /> คัดลอกแล้ว
+                  </span>
+                )}
+              </button>
             </div>
           </div>
 
@@ -147,7 +170,7 @@ export default function Footer({ onOpenBooking }: FooterProps) {
               href={BRAND_CONFIG.lineUrl}
               target="_blank"
               rel="noreferrer"
-              className="w-8 h-8 rounded-full bg-white/10 hover:bg-[#06C755] flex items-center justify-center text-slate-300 hover:text-white transition"
+              className="w-8 h-8 rounded-full bg-white/10 hover:bg-[#06C755] flex items-center justify-center text-slate-300 hover:text-white hover:-translate-y-1 hover:shadow-lg active:scale-95 transition-all duration-200"
               aria-label="LINE"
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -160,7 +183,7 @@ export default function Footer({ onOpenBooking }: FooterProps) {
               href={BRAND_CONFIG.facebookUrl}
               target="_blank"
               rel="noreferrer"
-              className="w-8 h-8 rounded-full bg-white/10 hover:bg-[#1877F2] flex items-center justify-center text-slate-300 hover:text-white transition"
+              className="w-8 h-8 rounded-full bg-white/10 hover:bg-[#1877F2] flex items-center justify-center text-slate-300 hover:text-white hover:-translate-y-1 hover:shadow-lg active:scale-95 transition-all duration-200"
               aria-label="Facebook"
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -173,7 +196,7 @@ export default function Footer({ onOpenBooking }: FooterProps) {
               href="https://instagram.com"
               target="_blank"
               rel="noreferrer"
-              className="w-8 h-8 rounded-full bg-white/10 hover:bg-[#E4405F] flex items-center justify-center text-slate-300 hover:text-white transition"
+              className="w-8 h-8 rounded-full bg-white/10 hover:bg-[#E4405F] flex items-center justify-center text-slate-300 hover:text-white hover:-translate-y-1 hover:shadow-lg active:scale-95 transition-all duration-200"
               aria-label="Instagram"
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -186,7 +209,7 @@ export default function Footer({ onOpenBooking }: FooterProps) {
               href={BRAND_CONFIG.youtubeUrl}
               target="_blank"
               rel="noreferrer"
-              className="w-8 h-8 rounded-full bg-white/10 hover:bg-[#FF0000] flex items-center justify-center text-slate-300 hover:text-white transition"
+              className="w-8 h-8 rounded-full bg-white/10 hover:bg-[#FF0000] flex items-center justify-center text-slate-300 hover:text-white hover:-translate-y-1 hover:shadow-lg active:scale-95 transition-all duration-200"
               aria-label="YouTube"
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -199,7 +222,7 @@ export default function Footer({ onOpenBooking }: FooterProps) {
               href={BRAND_CONFIG.tiktokUrl}
               target="_blank"
               rel="noreferrer"
-              className="w-8 h-8 rounded-full bg-white/10 hover:bg-black flex items-center justify-center text-slate-300 hover:text-white transition"
+              className="w-8 h-8 rounded-full bg-white/10 hover:bg-black flex items-center justify-center text-slate-300 hover:text-white hover:-translate-y-1 hover:shadow-lg active:scale-95 transition-all duration-200"
               aria-label="TikTok"
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -210,7 +233,7 @@ export default function Footer({ onOpenBooking }: FooterProps) {
             {/* Email Icon */}
             <a
               href={`mailto:${BRAND_CONFIG.supportEmail}`}
-              className="w-8 h-8 rounded-full bg-white/10 hover:bg-orange-600 flex items-center justify-center text-slate-300 hover:text-white transition"
+              className="w-8 h-8 rounded-full bg-white/10 hover:bg-orange-600 flex items-center justify-center text-slate-300 hover:text-white hover:-translate-y-1 hover:shadow-lg active:scale-95 transition-all duration-200"
               aria-label="Email"
             >
               <Mail className="w-4 h-4" />
@@ -219,7 +242,7 @@ export default function Footer({ onOpenBooking }: FooterProps) {
             {/* Website Globe */}
             <a
               href="https://fixnow.co.th"
-              className="w-8 h-8 rounded-full bg-white/10 hover:bg-slate-700 flex items-center justify-center text-slate-300 hover:text-white transition"
+              className="w-8 h-8 rounded-full bg-white/10 hover:bg-slate-700 flex items-center justify-center text-slate-300 hover:text-white hover:-translate-y-1 hover:shadow-lg active:scale-95 transition-all duration-200"
               aria-label="Website"
             >
               <Globe className="w-4 h-4" />

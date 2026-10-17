@@ -16,10 +16,10 @@ export default function FloatingActions({ onOpenBooking }: FloatingActionsProps)
         {/* Wrench / Emergency Booking */}
         <button
           onClick={onOpenBooking}
-          className="w-14 h-14 rounded-full bg-orange-500 hover:bg-orange-600 text-white flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-200 active:scale-95"
+          className="w-14 h-14 rounded-full bg-orange-500 hover:bg-orange-600 text-white flex items-center justify-center shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-200 active:scale-95 group"
           aria-label="เรียกช่างฉุกเฉิน"
         >
-          <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="w-7 h-7 group-hover:rotate-12 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.049.58.025 1.193-.14 1.743" />
           </svg>
         </button>
@@ -27,7 +27,7 @@ export default function FloatingActions({ onOpenBooking }: FloatingActionsProps)
         {/* Emergency Call Button */}
         <a
           href={`tel:${BRAND_CONFIG.hotline.replace(/-/g, "")}`}
-          className="w-14 h-14 rounded-full bg-green-600 hover:bg-green-700 text-white flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-200 active:scale-95"
+          className="animate-beacon w-14 h-14 rounded-full bg-green-600 hover:bg-green-700 text-white flex items-center justify-center shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
           aria-label="โทรฉุกเฉิน 24 ชม."
         >
           <PhoneCall className="w-7 h-7" />
@@ -38,7 +38,7 @@ export default function FloatingActions({ onOpenBooking }: FloatingActionsProps)
           href={BRAND_CONFIG.lineUrl}
           target="_blank"
           rel="noreferrer"
-          className="w-14 h-14 rounded-full bg-[#06C755] hover:bg-[#05b34c] text-white flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-200 active:scale-95"
+          className="w-14 h-14 rounded-full bg-[#06C755] hover:bg-[#05b34c] text-white flex items-center justify-center shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
           aria-label="ติดต่อทาง LINE"
         >
           <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
@@ -51,7 +51,7 @@ export default function FloatingActions({ onOpenBooking }: FloatingActionsProps)
       <div className="fixed bottom-20 right-4 z-40 sm:hidden flex flex-col items-end gap-2.5">
         <a
           href={`tel:${BRAND_CONFIG.hotline.replace(/-/g, "")}`}
-          className="w-12 h-12 rounded-full bg-green-600 text-white flex items-center justify-center shadow-lg active:scale-95 transition"
+          className="animate-beacon w-12 h-12 rounded-full bg-green-600 text-white flex items-center justify-center shadow-lg active:scale-95 transition"
           aria-label="โทรฉุกเฉิน 24 ชม."
         >
           <PhoneCall className="w-5 h-5 text-white" />

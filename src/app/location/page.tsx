@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ChevronLeft, Search, Crosshair, MapPin, X, Loader2, Navigation } from "lucide-react";
+import { ChevronLeft, Search, Crosshair, MapPin, X, Loader2, Navigation, Check } from "lucide-react";
 import { useUserLocation, formatShortAddress } from "@/contexts/LocationContext";
 
 // Default coordinates: Democracy Monument, Bangkok (same as 24carfix default)
@@ -37,6 +37,8 @@ function LocationPickerContent() {
   const [address, setAddress] = useState<string>(location?.address || "อนุสาวรีย์ประชาธิปไตย, ถนนราชดำเนินกลาง, เขตพระนคร, กรุงเทพมหานคร");
   const [isLoadingAddress, setIsLoadingAddress] = useState(false);
   const [isPinBouncing, setIsPinBouncing] = useState(false);
+  const [showRadarRipple, setShowRadarRipple] = useState(false);
+  const [isConfirmed, setIsConfirmed] = useState(false);
   const [showPermissionModal, setShowPermissionModal] = useState(false);
   const [isLocatingUser, setIsLocatingUser] = useState(false);
 
@@ -144,6 +146,7 @@ function LocationPickerContent() {
       // Listen for map movement
       map.on("movestart", () => {
         setIsPinBouncing(true);
+        setShowRadarRipple(false);
       });
 
       map.on("moveend", () => {
@@ -151,6 +154,9 @@ function LocationPickerContent() {
         const center = map.getCenter();
         setCoords({ lat: center.lat, lng: center.lng });
         fetchAddress(center.lat, center.lng);
+        // Trigger single radar range ripple when pin settles
+        setShowRadarRipple(true);
+        setTimeout(() => setShowRadarRipple(false), 900);
       });
 
       mapInstanceRef.current = map;
@@ -252,13 +258,16 @@ function LocationPickerContent() {
 
   // Confirm pin & return
   const handleConfirmPin = () => {
+    setIsConfirmed(true);
     setPinnedLocation({
       lat: coords.lat,
       lng: coords.lng,
       address,
       shortAddress: formatShortAddress(address),
     });
-    router.push(returnUrl);
+    setTimeout(() => {
+      router.push(returnUrl);
+    }, 280);
   };
 
   return (
@@ -345,11 +354,16 @@ function LocationPickerContent() {
         >
           {/* Main Pin */}
           <div className="relative flex flex-col items-center">
-            <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-[#FF5A18] to-orange-500 shadow-xl border-2 border-white flex items-center justify-center">
+            {/* Single Radar Range Ripple when Pin settles */}
+            {showRadarRipple && (
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-orange-500/25 ring-2 ring-orange-500/40 animate-radar-ripple pointer-events-none" />
+            )}
+
+            <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-[#FF5A18] to-orange-500 shadow-xl border-2 border-white flex items-center justify-center relative z-10">
               <div className="w-4 h-4 rounded-full bg-white shadow-inner" />
             </div>
             {/* Triangle Tip */}
-            <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-[#FF5A18] -mt-0.5" />
+            <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-[#FF5A18] -mt-0.5 relative z-10" />
             {/* Ground Shadow */}
             <div
               className={`w-4 h-1.5 rounded-full bg-black/25 blur-[1.5px] transition-all duration-200 ${
@@ -408,10 +422,17 @@ function LocationPickerContent() {
         {/* Primary Action Button */}
         <button
           onClick={handleConfirmPin}
-          disabled={isLoadingAddress}
-          className="w-full h-12 rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 active:scale-[0.98] text-white font-bold text-base shadow-lg shadow-orange-500/25 transition disabled:opacity-60 flex items-center justify-center gap-2"
+          disabled={isLoadingAddress || isConfirmed}
+          className="w-full h-12 rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 active:scale-[0.98] text-white font-bold text-base shadow-lg shadow-orange-500/25 transition-all duration-150 disabled:opacity-60 flex items-center justify-center gap-2"
         >
-          <span>ปักหมุด</span>
+          {isConfirmed ? (
+            <>
+              <Check className="w-5 h-5 text-white animate-in zoom-in-75 duration-150" />
+              <span>บันทึกตำแหน่งแล้ว</span>
+            </>
+          ) : (
+            <span>ปักหมุด</span>
+          )}
         </button>
       </div>
 

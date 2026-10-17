@@ -65,3 +65,14 @@ FixNow คือแพลตฟอร์มดิจิทัลให้บร�
 - คอนทราสต์ของสีข้อความและปุ่มกดเป็นไปตามมาตรฐาน WCAG 2.1 AA อ่านง่ายทั้งในที่แสงจ้าและตอนกลางคืน
 - ขนาดพื้นที่สัมผัส (Touch Targets) สำหรับปุ่มโทรและปุ่มฉุกเฉินอย่างน้อย 48x48px
 - รองรับการกรอกข้อมูลอย่างสะดวกบนมือถือ พร้อมการแจ้งเตือนข้อผิดพลาดที่ชัดเจนและแก้ไขได้ง่าย
+
+## Aligned UX/UI Master Specifications (Grill-Me Decided)
+
+1. **Personality:** Emergency First — เน้นความเร็ว นิ่ง อุ่นใจ ปุ่มเรียกช่างและโทรด่วนเด่นที่สุด
+2. **Motion:** Subtle Tactile & Status Aliveness (100–150ms feedback, gentle ambient aliveness ทุก 5-6 วิ, ปราศจาก Bouncy Mascot)
+3. **Location Flow:** Request on Intent — แถบตำแหน่งเด่นบนสุด แตะแล้วจึงเข้าสู่หน้าแผนที่และขอสิทธิ์พิกัด
+4. **Booking Flow:** Two-Track Architecture — Fast Track ฉุกเฉิน 1 หน้าจบ vs Standard Track นัดหมายหลายขั้นตอน
+5. **AI Assistant:** Slide-up Bottom Drawer บนมือถือ ถามตอบอาการรถเสียได้ทันทีโดยไม่ต้องสลับหน้าทิ้ง
+6. **Live Tracking:** Full Map Live Tracking — แผนที่แสดงรถช่างแล่นเข้าหาจุดเกิดเหตุแบบเรียลไทม์ สไตล์ Grab/Bolt
+7. **Color System:** Clean Bright by Default with High Contrast (ขาวสะอาด ตัดด้วย Action Orange `#FF5A18` และ Dark Matte `#1c1c1c`)
+8. **Voice & Copy:** Direct, Reassuring & Professional — สื่อสารตรงไปตรงมา ระบุเวลาและราคาชัดเจน ปราศจากความคลุมเครือ

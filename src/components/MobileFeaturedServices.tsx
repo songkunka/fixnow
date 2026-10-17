@@ -36,14 +36,14 @@ export default function MobileFeaturedServices({ onOpenBooking }: MobileFeatured
             </p>
           </div>
 
-          {/* 2D Minimal Icon */}
+          {/* 2D Minimal Icon with subtle hover micro-tilt */}
           <div className="relative w-full aspect-square mt-auto flex items-center justify-center p-2">
             <Image
               src="/assets/brand/services/service_repair.png"
               alt="เรียกช่างฉุกเฉิน"
               width={120}
               height={120}
-              className="object-contain w-24 h-24 group-hover:scale-105 transition-transform duration-300"
+              className="object-contain w-24 h-24 group-hover:scale-105 group-hover:rotate-6 transition-transform duration-300"
             />
           </div>
         </Link>
@@ -152,8 +152,8 @@ export default function MobileFeaturedServices({ onOpenBooking }: MobileFeatured
             />
           </div>
 
-          {/* Water wave accent at bottom */}
-          <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-400 to-cyan-400" />
+          {/* Water wave accent at bottom with gentle shimmer */}
+          <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500 animate-wave-shimmer" />
         </Link>
       </div>
     </div>

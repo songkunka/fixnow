@@ -83,14 +83,15 @@ export default function Navbar({ onOpenBooking, onOpenPartner }: NavbarProps) {
           {/* Location Badge (Top left interactive map link) */}
           <Link
             href="/location?returnUrl=/"
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-50 hover:bg-orange-50 border border-slate-200 hover:border-orange-200 text-slate-700 hover:text-orange-600 transition text-xs font-semibold max-w-[200px] shadow-2xs group"
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-50 hover:bg-orange-50 border border-slate-200 hover:border-orange-200 text-slate-700 hover:text-orange-600 transition text-xs font-semibold max-w-[210px] shadow-2xs group active:scale-[0.98]"
             title={location?.address || "ปักหมุดตำแหน่งของคุณ"}
           >
-            <div className="w-5 h-5 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 shrink-0 group-hover:bg-orange-500 group-hover:text-white transition">
+            <div className="relative w-5 h-5 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 shrink-0 group-hover:bg-orange-500 group-hover:text-white transition duration-200">
               <MapPin className="w-3 h-3" />
+              <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-emerald-500 ring-1 ring-white animate-pulse" />
             </div>
             <span className="truncate">{location?.shortAddress || location?.address || "ปักหมุดตำแหน่ง"}</span>
-            <ChevronDown className="w-3 h-3 text-slate-400 shrink-0" />
+            <ChevronDown className="w-3 h-3 text-slate-400 shrink-0 group-hover:translate-y-0.5 transition-transform duration-200" />
           </Link>
         </div>
 
