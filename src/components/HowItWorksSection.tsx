@@ -23,9 +23,9 @@ export default function HowItWorksSection({ onOpenBooking }: HowItWorksSectionPr
   ];
 
   return (
-    <section id="about" className="py-16 bg-slate-50">
+    <section id="about" className="py-10 md:py-16 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex flex-col lg:flex-row items-center gap-12">
+        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
           {/* Left Side - Steps Flow */}
           <div className="flex-1">
             <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-2">
@@ -33,15 +33,15 @@ export default function HowItWorksSection({ onOpenBooking }: HowItWorksSectionPr
               <span className="text-orange-600">FixNow</span>
             </h2>
 
-            <div className="mt-8 space-y-0 relative">
+            <div className="mt-6 md:mt-8 space-y-0 relative">
               {/* Vertical Line */}
               <div className="absolute left-6 top-8 bottom-8 w-0.5 bg-slate-300" />
 
               {steps.map((step, idx) => (
-                <div key={step.number} className="relative flex items-center gap-4 py-3">
+                <div key={step.number} className="relative flex items-center gap-3 sm:gap-4 py-2.5 sm:py-3">
                   {/* Step Number Circle */}
                   <div
-                    className={`relative z-10 w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg shrink-0 shadow-md ${
+                    className={`relative z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold text-base sm:text-lg shrink-0 shadow-md ${
                       step.active
                         ? "bg-orange-500 text-white"
                         : "bg-white text-slate-400 border border-slate-300"
@@ -52,7 +52,7 @@ export default function HowItWorksSection({ onOpenBooking }: HowItWorksSectionPr
 
                   {/* Step Text */}
                   <div
-                    className={`flex-1 py-4 px-6 rounded-2xl text-base md:text-lg font-semibold ${
+                    className={`flex-1 py-3 px-4 sm:py-4 sm:px-6 rounded-xl sm:rounded-2xl text-sm sm:text-base md:text-lg font-semibold ${
                       step.active
                         ? "bg-orange-500 text-white shadow-lg"
                         : "bg-slate-200 text-slate-600"
@@ -67,12 +67,12 @@ export default function HowItWorksSection({ onOpenBooking }: HowItWorksSectionPr
 
           {/* Right Side - Phone Mockup */}
           <div className="flex-1 flex justify-center">
-            <div className="relative w-[280px] h-[560px] md:w-[320px] md:h-[640px]">
+            <div className="relative w-[220px] h-[440px] md:w-[320px] md:h-[640px]">
               <Image
                 src={appMockupSrc}
                 alt="FixNow App Flow"
                 fill
-                sizes="(max-width: 768px) 280px, 320px"
+                sizes="(max-width: 768px) 220px, 320px"
                 className="object-contain drop-shadow-2xl"
               />
             </div>

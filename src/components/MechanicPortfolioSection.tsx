@@ -25,34 +25,34 @@ export default function MechanicPortfolioSection({
   };
 
   return (
-    <section id="mechanics" className="py-16 bg-white">
+    <section id="mechanics" className="py-10 md:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4">
         {/* Section Header - matching 24carfix style */}
-        <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-orange-600 mb-2">
+        <div className="text-center mb-6 md:mb-10">
+          <h2 className="text-2xl md:text-4xl font-extrabold text-orange-600 mb-1.5">
             ผลงานช่าง ร้านซ่อมรถใกล้ฉัน
           </h2>
-          <p className="text-sm md:text-base text-slate-500">
+          <p className="text-xs md:text-base text-slate-500">
             ช่างที่ผ่านการตรวจสอบและยืนยันตัวตน พร้อมให้บริการนอกสถานที่
           </p>
         </div>
 
         {/* Featured Mechanic Showcase */}
-        <div className="max-w-4xl mx-auto bg-slate-50 rounded-3xl p-6 md:p-8 border border-slate-200 shadow-sm">
-          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
+        <div className="max-w-4xl mx-auto bg-slate-50 rounded-2xl md:rounded-3xl p-5 md:p-8 border border-slate-200 shadow-sm">
+          <div className="flex flex-col md:flex-row items-center gap-5 md:gap-8">
             {/* Avatar & Badge */}
             <div
               onClick={onOpenMechanicProfile}
-              className="relative w-36 h-36 md:w-44 md:h-44 rounded-2xl overflow-hidden shrink-0 shadow-md cursor-pointer group"
+              className="relative w-28 h-28 md:w-44 md:h-44 rounded-2xl overflow-hidden shrink-0 shadow-md cursor-pointer group"
             >
               <Image
                 src={mechanic.avatar}
                 alt={mechanic.name}
                 fill
-                sizes="(max-width: 768px) 144px, 176px"
+                sizes="(max-width: 768px) 112px, 176px"
                 className="object-cover object-top group-hover:scale-105 transition duration-300"
               />
-              <div className="absolute top-2 left-2 bg-orange-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow">
+              <div className="absolute top-2 left-2 bg-orange-500 text-white text-[9px] md:text-[10px] font-bold px-2 py-0.5 rounded-full shadow">
                 Verified ช่างมืออาชีพ
               </div>
             </div>

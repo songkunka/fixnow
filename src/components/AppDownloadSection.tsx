@@ -23,7 +23,7 @@ export default function AppDownloadSection() {
   );
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-orange-500 via-orange-500 to-orange-600 py-16 md:py-20">
+    <section className="relative overflow-hidden bg-gradient-to-br from-orange-500 via-orange-500 to-orange-600 py-10 md:py-20">
       {/* Decorative dots pattern */}
       <div className="absolute top-8 right-8 opacity-20">
         <div className="grid grid-cols-6 gap-2">
@@ -38,15 +38,15 @@ export default function AppDownloadSection() {
         </svg>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center gap-12">
+      <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center gap-6 lg:gap-12">
         {/* Left Side - Phone Mockup */}
         <div className="flex-1 flex justify-center">
-          <div className="relative w-[300px] h-[500px] md:w-[400px] md:h-[600px]">
+          <div className="relative w-[220px] h-[360px] md:w-[400px] md:h-[600px]">
             <Image
               src={appMockupSrc}
               alt="FixNow Mobile App"
               fill
-              sizes="(max-width: 768px) 300px, 400px"
+              sizes="(max-width: 768px) 220px, 400px"
               className="object-contain drop-shadow-2xl"
             />
           </div>

@@ -64,27 +64,27 @@ export default function Navbar({ onOpenBooking, onOpenPartner }: NavbarProps) {
   const avatarInitial = displayName.charAt(0).toUpperCase();
 
   return (
-    <nav className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
+    <nav className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-xs">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 h-[54px] sm:h-16 flex items-center justify-between gap-2 sm:gap-4">
         {/* Brand Logo & Location Indicator */}
-        <div className="flex items-center gap-3 shrink-0">
-          <Link href="/" className="flex items-center gap-3 group shrink-0">
-            <div className="relative h-9 sm:h-10 w-36 sm:w-44 flex items-center">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <Link href="/" className="flex items-center gap-2 group shrink-0">
+            <div className="relative h-7 sm:h-9 w-28 sm:w-40 flex items-center">
               <Image
                 src={logoSrc}
                 alt={BRAND_CONFIG.assets.logo.alt}
                 fill
-                sizes="(max-width: 768px) 144px, 176px"
+                sizes="(max-width: 768px) 120px, 160px"
                 className="object-contain object-left group-hover:scale-[1.02] transition"
                 priority
               />
             </div>
           </Link>
 
-          {/* Location Badge (Top left interactive map link) */}
+          {/* Desktop Location Badge */}
           <Link
             href="/location?returnUrl=/"
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-50 hover:bg-orange-50 border border-slate-200 hover:border-orange-200 text-slate-700 hover:text-orange-600 transition text-xs font-semibold max-w-[210px] shadow-2xs group active:scale-[0.98]"
+            className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-50 hover:bg-orange-50 border border-slate-200 hover:border-orange-200 text-slate-700 hover:text-orange-600 transition text-xs font-semibold max-w-[210px] shadow-2xs group active:scale-[0.98]"
             title={location?.address || "ปักหมุดตำแหน่งของคุณ"}
           >
             <div className="relative w-5 h-5 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 shrink-0 group-hover:bg-orange-500 group-hover:text-white transition duration-200">
@@ -93,6 +93,24 @@ export default function Navbar({ onOpenBooking, onOpenPartner }: NavbarProps) {
             </div>
             <span className="truncate">{location?.shortAddress || location?.address || "ปักหมุดตำแหน่ง"}</span>
             <ChevronDown className="w-3 h-3 text-slate-400 shrink-0 group-hover:translate-y-0.5 transition-transform duration-200" />
+          </Link>
+        </div>
+
+        {/* Mobile Unified Center Location Pill */}
+        <div className="lg:hidden flex-1 min-w-0 max-w-[190px] sm:max-w-xs mx-1">
+          <Link
+            href="/location?returnUrl=/"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-slate-50 hover:bg-orange-50 border border-slate-200 text-slate-700 text-xs font-semibold shadow-2xs active:scale-[0.98] transition group"
+            title={location?.address || "เลือกตำแหน่งของคุณ"}
+          >
+            <div className="relative w-4 h-4 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center shrink-0">
+              <MapPin className="w-2.5 h-2.5" />
+              <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-emerald-500 ring-1 ring-white animate-pulse" />
+            </div>
+            <span className="truncate text-[11px] sm:text-xs">
+              {location?.shortAddress || location?.address || "เลือกตำแหน่ง"}
+            </span>
+            <ChevronDown className="w-3 h-3 text-slate-400 shrink-0 group-hover:translate-y-0.5 transition-transform" />
           </Link>
         </div>
 
@@ -197,11 +215,11 @@ export default function Navbar({ onOpenBooking, onOpenPartner }: NavbarProps) {
         </div>
 
         {/* Right Section: Primary Booking CTA + Customer Support + Auth */}
-        <div className="flex items-center gap-2.5">
-          {/* Primary Action: Book Mechanic Online */}
+        <div className="flex items-center gap-2">
+          {/* Primary Action: Book Mechanic Online (Desktop Only) */}
           <Link
             href="/booking"
-            className="group flex items-center gap-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold text-sm px-4 py-2.5 rounded-full shadow-md shadow-orange-500/20 hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-200 active:scale-95"
+            className="hidden lg:flex group items-center gap-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold text-sm px-4 py-2.5 rounded-full shadow-md shadow-orange-500/20 hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-200 active:scale-95"
             title="เรียกช่างฉุกเฉินนอกสถานที่ 24 ชม."
           >
             <Wrench className="w-4 h-4 group-hover:rotate-12 transition-transform duration-200" />
@@ -303,10 +321,32 @@ export default function Navbar({ onOpenBooking, onOpenPartner }: NavbarProps) {
             </>
           )}
 
+          {/* Mobile User Avatar / Login */}
+          {!isLoading && (
+            <>
+              {user ? (
+                <Link
+                  href="/dashboard/profile"
+                  className="lg:hidden w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 text-white flex items-center justify-center text-xs font-bold shrink-0 shadow-sm active:scale-95 transition"
+                  title="โปรไฟล์ของคุณ"
+                >
+                  {avatarInitial}
+                </Link>
+              ) : (
+                <Link
+                  href="/auth/login"
+                  className="lg:hidden text-xs font-bold text-orange-600 px-2 py-1 rounded-lg bg-orange-50 border border-orange-200 active:scale-95 transition"
+                >
+                  เข้าสู่ระบบ
+                </Link>
+              )}
+            </>
+          )}
+
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-xl text-slate-700 hover:bg-slate-100 transition"
+            className="lg:hidden p-1.5 rounded-xl text-slate-700 hover:bg-slate-100 transition"
             aria-label="Toggle mobile menu"
           >
             {mobileMenuOpen ? (

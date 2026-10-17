@@ -36,31 +36,6 @@ export default function FloatingActions({ onOpenBooking }: FloatingActionsProps)
           <span>ฝ่ายบริการลูกค้า (LINE)</span>
         </a>
       </div>
-
-      {/* Mobile Floating Action (Positioned safely above MobileBottomNav) */}
-      <div className="fixed bottom-20 right-4 z-40 sm:hidden flex flex-col items-end gap-2">
-        {/* Primary Mobile CTA: Book Mechanic Online */}
-        <Link
-          href="/booking"
-          className="flex items-center gap-1.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold text-xs py-2.5 px-3.5 rounded-full shadow-xl shadow-orange-500/30 active:scale-95 transition"
-          aria-label="เรียกช่างออนไลน์"
-        >
-          <Wrench className="w-4 h-4" />
-          <span>เรียกช่างด่วน</span>
-        </Link>
-
-        {/* Secondary Mobile CTA: Customer Support */}
-        <a
-          href={BRAND_CONFIG.lineUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="w-10 h-10 rounded-full bg-white/95 backdrop-blur-md border border-slate-200 text-slate-600 hover:text-emerald-600 flex items-center justify-center shadow-md active:scale-95 transition"
-          aria-label="ฝ่ายบริการลูกค้า"
-          title="ติดต่อฝ่ายบริการลูกค้า"
-        >
-          <Headphones className="w-4 h-4 text-slate-500" />
-        </a>
-      </div>
     </>
   );
 }

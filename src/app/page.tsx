@@ -12,7 +12,6 @@ import HowItWorksSection from "@/components/HowItWorksSection";
 import TrustedBrandsSection from "@/components/TrustedBrandsSection";
 import FloatingActions from "@/components/FloatingActions";
 import Footer from "@/components/Footer";
-import MobileLocationBar from "@/components/MobileLocationBar";
 import MobileFeaturedServices from "@/components/MobileFeaturedServices";
 import MobileCategoryGrid from "@/components/MobileCategoryGrid";
 import MobileBottomNav from "@/components/MobileBottomNav";
@@ -62,11 +61,8 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 lg:bg-white text-slate-900 pb-16 lg:pb-0">
-      {/* 1. Mobile Top Location Bar (24carfix style top bar) */}
-      <MobileLocationBar />
-
-      {/* 2. Main Navbar (Logo + Location Badge + Services Dropdown + Nav Links + Phone CTA) */}
+    <div className="min-h-screen flex flex-col bg-slate-50 lg:bg-white text-slate-900 pb-24 lg:pb-0">
+      {/* 1. Unified Navbar (Logo + Location Pill + Services + Auth) */}
       <Navbar
         onOpenBooking={handleOpenBooking}
         onOpenPartner={handleOpenPartner}
