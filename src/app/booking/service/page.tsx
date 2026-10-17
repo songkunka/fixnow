@@ -2,144 +2,158 @@
 
 import React, { useState, Suspense } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
-import { ChevronLeft } from "lucide-react";
-
-// Service sub-categories matching 24carfix booking flow
-const ALL_SERVICES: Record<string, { id: string; name: string; icon: string; badge?: string }[]> = {
-  repair: [
-    { id: "car-repair", name: "ช่างซ่อมรถยนต์", icon: "/assets/brand/services/service_repair.png", badge: "ยอดนิยม" },
-    { id: "battery", name: "ช่างแบตเตอรี่ รถยนต์", icon: "/assets/brand/services/service_battery.png", badge: "ยอดนิยม" },
-    { id: "tire", name: "ช่างปะยาง รถยนต์", icon: "/assets/brand/services/service_tire.png" },
-    { id: "key", name: "ช่างกุญแจ รถยนต์", icon: "/assets/brand/services/service_key.png" },
-    { id: "fuel", name: "เติมน้ำมันฉุกเฉิน", icon: "/assets/brand/services/service_fuel.png" },
-    { id: "ev", name: "ช่างรถ EV / ไฮบริด", icon: "/assets/brand/services/service_ev.png", badge: "ยอดนิยม" },
-    { id: "alternator", name: "ไดนาโม ระบบไฟ", icon: "/assets/brand/services/service_repair.png" },
-    { id: "radiator", name: "หม้อน้ำ ความร้อน", icon: "/assets/brand/services/service_repair.png" },
-  ],
-  towing: [
-    { id: "slide-car", name: "รถสไลด์", icon: "/assets/brand/services/service_slide_car.png" },
-    { id: "crane", name: "รถยก", icon: "/assets/brand/services/service_slide_car.png" },
-  ],
-  motorcycle: [
-    { id: "mc-repair", name: "ซ่อมมอเตอร์ไซค์", icon: "/assets/brand/services/service_motorcycle_repair.png" },
-    { id: "mc-tire", name: "ปะยางมอเตอร์ไซค์", icon: "/assets/brand/services/service_tire.png" },
-  ],
-  volunteer: [
-    { id: "vol-car", name: "ช่างอาสาซ่อมรถยนต์", icon: "/assets/brand/services/service_volunteer_car.png" },
-    { id: "vol-mc", name: "ช่างอาสาซ่อมมอเตอร์ไซค์", icon: "/assets/brand/services/service_motorcycle_repair.png" },
-  ],
-  parts: [
-    { id: "parts-car", name: "อะไหล่รถยนต์", icon: "/assets/brand/services/service_inspection.png" },
-    { id: "parts-mc", name: "อะไหล่มอเตอร์ไซค์", icon: "/assets/brand/services/service_motorcycle_repair.png" },
-  ],
-};
-
-const STEPS = [
-  { number: 1, label: "บริการ" },
-  { number: 2, label: "บริการย่อย" },
-  { number: 3, label: "ประเภทรถ" },
-  { number: 4, label: "ประเภทย่อย" },
-];
+import { Info, ArrowRight, ShieldCheck, Check } from "lucide-react";
+import { getCategoryById, SubService, SERVICE_CATEGORIES } from "@/data/bookingServices";
+import BookingStepper from "@/components/booking/BookingStepper";
+import SubServiceInfoModal from "@/components/booking/SubServiceInfoModal";
 
 function BookingServiceContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const category = searchParams.get("category") || "repair";
+  const categoryId = searchParams.get("category") || "repair";
 
-  const services = ALL_SERVICES[category] || ALL_SERVICES["repair"];
+  const category = getCategoryById(categoryId) || SERVICE_CATEGORIES[0];
+  const [selectedService, setSelectedService] = useState<SubService | null>(null);
+  const [infoModalService, setInfoModalService] = useState<SubService | null>(null);
+
+  const handleSelectService = (service: SubService) => {
+    setSelectedService(service);
+    // Proceed to Step 3: Vehicle Selection
+    router.push(`/booking/vehicle?category=${category.id}&service=${service.id}`);
+  };
 
   return (
-    <div className="p-6 md:p-10 pb-20 md:pb-10">
-      {/* Back + Title */}
-      <div className="flex items-center gap-3 mb-8">
-        <button
-          onClick={() => router.back()}
-          aria-label="ย้อนกลับ"
-          className="w-11 h-11 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition active:scale-95 shrink-0"
-        >
-          <ChevronLeft className="w-5 h-5 text-slate-600" />
-        </button>
-        <h1 className="text-xl md:text-2xl font-bold text-slate-900">
-          เลือกหมวดหมู่บริการ
-        </h1>
-      </div>
+    <div className="p-4 sm:p-6 md:p-10 pb-24 md:pb-12 max-w-4xl mx-auto">
+      {/* Step 2 Stepper */}
+      <BookingStepper
+        currentStep={2}
+        title="เลือกบริการย่อย"
+        backHref="/booking"
+      />
 
-      {/* Progress Stepper — matching 24carfix 4-step */}
-      <div className="max-w-xl mx-auto mb-10">
-        <div className="flex items-center justify-between">
-          {STEPS.map((s, i) => (
-            <React.Fragment key={s.number}>
-              <div className="flex flex-col items-center gap-1.5">
-                <div
-                  className={`w-8 h-8 md:w-9 md:h-9 rounded-full flex items-center justify-center text-sm font-bold ${
-                    s.number === 1
-                      ? "bg-orange-500 text-white"
-                      : "bg-slate-200 text-slate-400"
-                  }`}
-                >
-                  {s.number}
-                </div>
-                <span
-                  className={`text-[10px] md:text-xs font-medium ${
-                    s.number === 1 ? "text-orange-600" : "text-slate-400"
-                  }`}
-                >
-                  {s.label}
-                </span>
-              </div>
-              {i < STEPS.length - 1 && (
-                <div className="flex-1 h-0.5 bg-slate-200 mx-2 mt-[-16px]" />
-              )}
-            </React.Fragment>
-          ))}
+      {/* Selected Category Header Banner */}
+      <div className="bg-gradient-to-r from-orange-50 via-white to-orange-50/30 border border-orange-200/80 rounded-2xl p-4 sm:p-5 mb-6 flex items-center gap-4">
+        <div className="relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 bg-white rounded-xl p-1 shadow-sm border border-orange-100">
+          <Image
+            src={category.icon}
+            alt={category.name}
+            fill
+            sizes="64px"
+            className="object-contain p-1"
+          />
+        </div>
+        <div>
+          <span className="text-[11px] font-bold text-orange-600 uppercase tracking-wider">
+            หมวดหมู่ที่เลือก
+          </span>
+          <h2 className="text-lg sm:text-xl font-bold text-slate-900">
+            {category.name}
+          </h2>
+          <p className="text-xs text-slate-500 mt-0.5">{category.sub}</p>
         </div>
       </div>
 
-      {/* Instruction */}
-      <p className="text-sm text-slate-500 mb-5">กรุณาเลือกหมวดหมู่บริการ</p>
-
-      {/* Service Grid — matching 24carfix layout */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-3xl">
-        {services.map((svc) => (
-          <Link
-            key={svc.id}
-            href={`/booking/vehicle?service=${svc.id}&category=${category}`}
-            className="group relative rounded-2xl border-2 border-slate-200 bg-white p-4 hover:border-orange-300 hover:shadow-md transition-all active:scale-[0.97]"
-          >
-            {/* Badge */}
-            {svc.badge && (
-              <span className="absolute top-2.5 right-2.5 text-[9px] font-bold bg-orange-500 text-white px-2 py-0.5 rounded-full">
-                {svc.badge}
-              </span>
-            )}
-
-            {/* Icon */}
-            <div className="relative w-14 h-14 mb-3">
-              <Image
-                src={svc.icon}
-                alt={svc.name}
-                fill
-                sizes="56px"
-                className="object-contain"
-              />
-            </div>
-
-            {/* Name */}
-            <h3 className="font-bold text-sm text-slate-900 group-hover:text-orange-600 transition">
-              {svc.name}
-            </h3>
-          </Link>
-        ))}
+      {/* Section Instruction */}
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-sm sm:text-base font-bold text-slate-900">
+          รายการบริการ ({category.subServices.length} รายการ)
+        </h3>
+        <span className="text-xs text-slate-500 flex items-center gap-1">
+          <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+          ราคามาตรฐาน ชำระหน้างาน
+        </span>
       </div>
+
+      {/* Sub-services List */}
+      <div className="space-y-3">
+        {category.subServices.map((service) => {
+          const isSelected = selectedService?.id === service.id;
+
+          return (
+            <div
+              key={service.id}
+              onClick={() => handleSelectService(service)}
+              className={`group relative rounded-2xl border-2 p-4 sm:p-5 transition-all duration-200 cursor-pointer active:scale-[0.99] flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 ${
+                isSelected
+                  ? "border-orange-500 bg-orange-50/40 shadow-md ring-2 ring-orange-200"
+                  : "border-slate-200 bg-white hover:border-orange-400 hover:shadow-md"
+              }`}
+            >
+              {/* Left Info */}
+              <div className="flex-1 pr-2">
+                <div className="flex items-start gap-2">
+                  <h4 className="font-bold text-slate-900 text-sm sm:text-base group-hover:text-orange-600 transition-colors">
+                    {service.name}
+                  </h4>
+                  {/* Info Modal Trigger Button */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setInfoModalService(service);
+                    }}
+                    aria-label="ดูรายละเอียดบริการ"
+                    className="p-1 rounded-full text-slate-400 hover:text-orange-600 hover:bg-orange-50 active:scale-95 transition shrink-0"
+                  >
+                    <Info className="w-4 h-4" />
+                  </button>
+                </div>
+
+                {/* Service Note */}
+                <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                  {service.note}
+                </p>
+              </div>
+
+              {/* Right: Price & Action */}
+              <div className="flex items-center justify-between sm:justify-end gap-3 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 shrink-0">
+                <div className="text-left sm:text-right">
+                  <span className="text-xs text-slate-400 block font-normal">
+                    ราคาเริ่มต้น
+                  </span>
+                  <span className="text-lg sm:text-xl font-extrabold text-orange-600 tracking-tight">
+                    {service.priceFormatted}
+                  </span>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleSelectService(service);
+                  }}
+                  className="bg-orange-500 hover:bg-orange-600 active:scale-95 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition flex items-center gap-1.5 shadow-sm shadow-orange-500/20"
+                >
+                  <span>เลือก</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Detail Modal */}
+      <SubServiceInfoModal
+        service={infoModalService}
+        isOpen={!!infoModalService}
+        onClose={() => setInfoModalService(null)}
+        onSelect={(srv) => handleSelectService(srv)}
+      />
     </div>
   );
 }
 
 export default function BookingServicePage() {
   return (
-    <Suspense fallback={<div className="p-10 text-center text-slate-400">กำลังโหลด...</div>}>
+    <Suspense
+      fallback={
+        <div className="p-8 text-center text-slate-500">
+          กำลังโหลดรายการบริการ...
+        </div>
+      }
+    >
       <BookingServiceContent />
     </Suspense>
   );
