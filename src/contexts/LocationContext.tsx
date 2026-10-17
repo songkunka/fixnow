@@ -13,7 +13,9 @@ export interface UserLocation {
 interface LocationContextType {
   location: UserLocation | null;
   isPinned: boolean;
+  isRequestingLocation: boolean;
   setPinnedLocation: (loc: { lat: number; lng: number; address: string; shortAddress?: string }) => void;
+  requestCurrentLocation: (remember?: boolean) => Promise<UserLocation | null>;
   clearLocation: () => void;
 }
 
@@ -40,12 +42,35 @@ export function formatShortAddress(fullAddress: string): string {
   return `${parts[0]}, ${parts[1]}`;
 }
 
+// Shared Thai Reverse Geocoding helper
+export async function fetchReverseGeocode(lat: number, lng: number): Promise<string> {
+  try {
+    const res = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1&accept-language=th`,
+      { headers: { "User-Agent": "FixNowPlatform/1.0" } }
+    );
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.display_name) {
+        return data.display_name;
+      }
+    }
+  } catch (err) {
+    console.warn("Reverse geocode failed:", err);
+  }
+  return `พิกัด ${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+}
+
 export function LocationProvider({ children }: { children: React.ReactNode }) {
   const [location, setLocation] = useState<UserLocation | null>(null);
+  const [isRequestingLocation, setIsRequestingLocation] = useState(false);
 
   useEffect(() => {
     // Read from localStorage on mount
     try {
+      // Clear legacy blocking flag if present
+      localStorage.removeItem("fixnow_geo_prompt_shown");
+
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
@@ -88,6 +113,53 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const requestCurrentLocation = async (remember = true): Promise<UserLocation | null> => {
+    if (typeof window === "undefined" || !("geolocation" in navigator)) {
+      return null;
+    }
+
+    setIsRequestingLocation(true);
+
+    return new Promise((resolve) => {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          const fullAddress = await fetchReverseGeocode(lat, lng);
+          const short = formatShortAddress(fullAddress);
+
+          const newLoc: UserLocation = {
+            lat,
+            lng,
+            address: fullAddress,
+            shortAddress: short,
+            updatedAt: new Date().toISOString(),
+          };
+
+          setLocation(newLoc);
+          setIsRequestingLocation(false);
+
+          if (remember) {
+            try {
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(newLoc));
+              window.dispatchEvent(new CustomEvent(EVENT_KEY, { detail: newLoc }));
+            } catch {
+              // ignore storage errors
+            }
+          }
+
+          resolve(newLoc);
+        },
+        (error) => {
+          console.warn("Geolocation request failed or was denied:", error);
+          setIsRequestingLocation(false);
+          resolve(null);
+        },
+        { enableHighAccuracy: true, timeout: 8000 }
+      );
+    });
+  };
+
   const clearLocation = () => {
     setLocation(null);
     try {
@@ -103,7 +175,9 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
       value={{
         location,
         isPinned: !!location,
+        isRequestingLocation,
         setPinnedLocation,
+        requestCurrentLocation,
         clearLocation,
       }}
     >
@@ -119,7 +193,9 @@ export function useUserLocation() {
     return {
       location: null,
       isPinned: false,
+      isRequestingLocation: false,
       setPinnedLocation: () => {},
+      requestCurrentLocation: async () => null,
       clearLocation: () => {},
     };
   }

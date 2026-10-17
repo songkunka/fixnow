@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef, useCallback, Suspense } from "react
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChevronLeft, Search, Crosshair, MapPin, X, Loader2, Navigation, Check } from "lucide-react";
 import { useUserLocation, formatShortAddress } from "@/contexts/LocationContext";
+import LocationPermissionModal from "@/components/LocationPermissionModal";
 
 // Default coordinates: Democracy Monument, Bangkok (same as 24carfix default)
 const DEFAULT_LAT = 13.7563;
@@ -21,7 +22,7 @@ function LocationPickerContent() {
   const searchParams = useSearchParams();
   const returnUrl = searchParams.get("returnUrl") || "/";
 
-  const { location, setPinnedLocation } = useUserLocation();
+  const { location, setPinnedLocation, requestCurrentLocation, isRequestingLocation } = useUserLocation();
 
   // Map state
   const mapContainerRef = useRef<HTMLDivElement>(null);
@@ -30,11 +31,34 @@ function LocationPickerContent() {
     if (location && location.lat && location.lng) {
       return { lat: location.lat, lng: location.lng };
     }
+    if (typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem("fixnow_user_location");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed?.lat && parsed?.lng) {
+            return { lat: parsed.lat, lng: parsed.lng };
+          }
+        }
+      } catch {}
+    }
     return { lat: DEFAULT_LAT, lng: DEFAULT_LNG };
   });
 
   // UI state
-  const [address, setAddress] = useState<string>(location?.address || "อนุสาวรีย์ประชาธิปไตย, ถนนราชดำเนินกลาง, เขตพระนคร, กรุงเทพมหานคร");
+  const [address, setAddress] = useState<string>(() => {
+    if (location?.address) return location.address;
+    if (typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem("fixnow_user_location");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed?.address) return parsed.address;
+        }
+      } catch {}
+    }
+    return "อนุสาวรีย์ประชาธิปไตย, ถนนราชดำเนินกลาง, เขตพระนคร, กรุงเทพมหานคร";
+  });
   const [isLoadingAddress, setIsLoadingAddress] = useState(false);
   const [isPinBouncing, setIsPinBouncing] = useState(false);
   const [showRadarRipple, setShowRadarRipple] = useState(false);
@@ -160,12 +184,6 @@ function LocationPickerContent() {
       });
 
       mapInstanceRef.current = map;
-
-      // Check if location permission prompt is needed
-      const hasAskedPermission = localStorage.getItem("fixnow_geo_prompt_shown");
-      if (!hasAskedPermission && !location) {
-        setShowPermissionModal(true);
-      }
     };
 
     loadLeaflet();
@@ -179,31 +197,44 @@ function LocationPickerContent() {
     };
   }, [fetchAddress]);
 
-  // Request native GPS location
-  const handleRequestGPS = () => {
-    setShowPermissionModal(false);
-    localStorage.setItem("fixnow_geo_prompt_shown", "true");
-    setIsLocatingUser(true);
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          const lat = pos.coords.latitude;
-          const lng = pos.coords.longitude;
-          setCoords({ lat, lng });
+  // Prompt user for location permission if they do not have a saved location yet
+  useEffect(() => {
+    let hasSavedLocation = !!(location && location.lat && location.lng);
+    if (!hasSavedLocation && typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem("fixnow_user_location");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed?.lat && parsed?.lng) hasSavedLocation = true;
+        }
+      } catch {}
+    }
 
-          if (mapInstanceRef.current) {
-            mapInstanceRef.current.flyTo([lat, lng], 17, { duration: 1.2 });
-          }
-          fetchAddress(lat, lng);
-          setIsLocatingUser(false);
-        },
-        () => {
-          setIsLocatingUser(false);
-        },
-        { enableHighAccuracy: true, timeout: 6000 }
-      );
-    } else {
+    if (!hasSavedLocation) {
+      const timer = setTimeout(() => {
+        setShowPermissionModal(true);
+      }, 350);
+      return () => clearTimeout(timer);
+    }
+  }, [location]);
+
+  // Request native GPS location and smoothly animate map to user
+  const handleRequestLocation = async (remember = true) => {
+    setIsLocatingUser(true);
+    try {
+      const loc = await requestCurrentLocation(remember);
+      if (loc) {
+        setCoords({ lat: loc.lat, lng: loc.lng });
+        setAddress(loc.address);
+        if (mapInstanceRef.current) {
+          mapInstanceRef.current.flyTo([loc.lat, loc.lng], 17, { duration: 1.2 });
+          setShowRadarRipple(true);
+          setTimeout(() => setShowRadarRipple(false), 900);
+        }
+      }
+    } finally {
       setIsLocatingUser(false);
+      setShowPermissionModal(false);
     }
   };
 
@@ -375,12 +406,12 @@ function LocationPickerContent() {
 
         {/* GPS Re-center Floating Button */}
         <button
-          onClick={handleRequestGPS}
-          disabled={isLocatingUser}
+          onClick={() => handleRequestLocation(true)}
+          disabled={isLocatingUser || isRequestingLocation}
           className="absolute right-4 bottom-48 z-20 w-12 h-12 rounded-full bg-white shadow-xl border border-slate-200/90 flex items-center justify-center text-slate-700 hover:text-orange-600 active:scale-95 transition"
           aria-label="ตำแหน่งปัจจุบันของคุณ"
         >
-          {isLocatingUser ? (
+          {isLocatingUser || isRequestingLocation ? (
             <Loader2 className="w-6 h-6 animate-spin text-orange-600" />
           ) : (
             <Crosshair className="w-6 h-6 text-slate-700" />
@@ -436,60 +467,13 @@ function LocationPickerContent() {
         </button>
       </div>
 
-      {/* Permission Modal Dialog (Matching 24carfix sample image 1) */}
-      {showPermissionModal && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="w-full max-w-sm bg-[#1e1e24] text-white rounded-3xl p-6 shadow-2xl border border-white/10 animate-in fade-in zoom-in-95 duration-200">
-            {/* Header with Close X */}
-            <div className="flex items-start justify-between mb-4">
-              <div className="pr-4">
-                <h3 className="font-bold text-base text-white">
-                  fixnow.co.th ต้องการที่จะ
-                </h3>
-                <div className="flex items-center gap-2 mt-2 text-slate-300 text-sm">
-                  <MapPin className="w-4 h-4 text-orange-400 shrink-0" />
-                  <span>ทราบตำแหน่งของคุณ</span>
-                </div>
-              </div>
-              <button
-                onClick={() => {
-                  setShowPermissionModal(false);
-                  localStorage.setItem("fixnow_geo_prompt_shown", "true");
-                }}
-                className="text-slate-400 hover:text-white p-1"
-                aria-label="ปิด"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* 3 Buttons matching 24carfix prompt */}
-            <div className="space-y-2.5 mt-6">
-              <button
-                onClick={handleRequestGPS}
-                className="w-full py-3 px-4 rounded-full bg-[#5b326a] hover:bg-[#6c3b7e] active:scale-98 text-white font-semibold text-sm transition text-center shadow-md"
-              >
-                อนุญาตขณะเข้าชมเว็บไซต์
-              </button>
-              <button
-                onClick={handleRequestGPS}
-                className="w-full py-3 px-4 rounded-full bg-[#5b326a]/90 hover:bg-[#6c3b7e] active:scale-98 text-white font-semibold text-sm transition text-center"
-              >
-                อนุญาตในครั้งนี้
-              </button>
-              <button
-                onClick={() => {
-                  setShowPermissionModal(false);
-                  localStorage.setItem("fixnow_geo_prompt_shown", "true");
-                }}
-                className="w-full py-3 px-4 rounded-full bg-[#5b326a]/50 hover:bg-[#5b326a]/70 active:scale-98 text-slate-300 font-semibold text-sm transition text-center"
-              >
-                ไม่อนุญาต
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Location Permission Modal Dialog (Reusable 3-button 24carfix style) */}
+      <LocationPermissionModal
+        isOpen={showPermissionModal}
+        onAllow={handleRequestLocation}
+        onDeny={() => setShowPermissionModal(false)}
+        isLocating={isLocatingUser || isRequestingLocation}
+      />
     </div>
   );
 }

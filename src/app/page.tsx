@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import HeroBanner from "@/components/HeroBanner";
@@ -16,9 +16,42 @@ import MobileLocationBar from "@/components/MobileLocationBar";
 import MobileFeaturedServices from "@/components/MobileFeaturedServices";
 import MobileCategoryGrid from "@/components/MobileCategoryGrid";
 import MobileBottomNav from "@/components/MobileBottomNav";
+import LocationPermissionModal from "@/components/LocationPermissionModal";
+import { useUserLocation } from "@/contexts/LocationContext";
 
 export default function HomePage() {
   const router = useRouter();
+  const { location, requestCurrentLocation, isRequestingLocation } = useUserLocation();
+  const [showPermissionModal, setShowPermissionModal] = useState(false);
+
+  // Check and prompt location permission once on first visit if no location is set
+  useEffect(() => {
+    try {
+      const sessionDismissed = sessionStorage.getItem("fixnow_home_geo_dismissed");
+      if (!location && !sessionDismissed) {
+        const timer = setTimeout(() => {
+          setShowPermissionModal(true);
+        }, 500);
+        return () => clearTimeout(timer);
+      }
+    } catch {
+      // ignore storage errors
+    }
+  }, [location]);
+
+  const handleAllowLocation = async (remember: boolean) => {
+    await requestCurrentLocation(remember);
+    setShowPermissionModal(false);
+  };
+
+  const handleDenyLocation = () => {
+    setShowPermissionModal(false);
+    try {
+      sessionStorage.setItem("fixnow_home_geo_dismissed", "true");
+    } catch {
+      // ignore
+    }
+  };
 
   // Navigate to full-page booking instead of opening modal
   const handleOpenBooking = (serviceId?: string) => {
@@ -36,6 +69,13 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 lg:bg-white text-slate-900 pb-16 lg:pb-0">
+      {/* Permission Modal on Initial Homepage Entry */}
+      <LocationPermissionModal
+        isOpen={showPermissionModal}
+        onAllow={handleAllowLocation}
+        onDeny={handleDenyLocation}
+        isLocating={isRequestingLocation}
+      />
       {/* 1. Mobile Top Location Bar (24carfix style top bar) */}
       <MobileLocationBar />
 
